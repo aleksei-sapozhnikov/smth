@@ -6,7 +6,6 @@ jobs:
     steps: 
       - name: Print greeting
         run: |
-          @echo off
           echo "Hello World!"
           echo "I'm a program!"
           echo "How are you?"
