@@ -10,4 +10,4 @@ jobs:
           echo "I'm a program!"
           echo "How are you?"
       - name: Print goodbye
-        run: echo "Goodbye!"
+        run: echo "Goodbye loosers!"
