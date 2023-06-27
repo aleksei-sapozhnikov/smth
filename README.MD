@@ -9,3 +9,4 @@ things here and hope it'll grow.
 
 * Spring MVC
 * Gradle
+* Github Actions
