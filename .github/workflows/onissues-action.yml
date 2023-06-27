@@ -1,4 +1,4 @@
-name: Workflow on push
+name: Workflow on issues
 on: [push, workflow_dispatch]
 jobs:
   output_environment:
