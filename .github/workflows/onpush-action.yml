@@ -1,0 +1,39 @@
+name: Workflow on push
+on: [push, workflow_dispatch]
+jobs:
+  output_environment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print environment
+        run: echo "${{ toJSON(github) }}"
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download source code
+        uses: actions/checkout@v3
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+      - name: Run unit tests
+        run: ./gradlew test
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download source code
+        uses: actions/checkout@v3
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+      - name: Build project
+        run: ./gradlew build
+      - name: Deploy
+        run: echo "Simulating deployment..."

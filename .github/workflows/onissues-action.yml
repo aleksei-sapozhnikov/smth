@@ -1,0 +1,8 @@
+name: Workflow on issues
+on: [issues]
+jobs:
+  output_environment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print environment
+        run: echo "${{ toJSON(github) }}"
