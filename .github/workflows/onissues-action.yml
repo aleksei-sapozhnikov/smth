@@ -1,0 +1,8 @@
+name: Workflow on push
+on: [push, workflow_dispatch]
+jobs:
+  output_environment:
+    runs-on: issues
+    steps:
+      - name: Print environment
+        run: echo "${{ toJSON(github) }}"
