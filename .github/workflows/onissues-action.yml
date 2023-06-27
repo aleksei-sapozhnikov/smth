@@ -7,6 +7,6 @@ jobs:
       - name: Print environment
         run: | 
           echo Issue: "${{github.event.issue.title}}"
-          echo "${{github.event.changes}}"
+          echo "${{toJSON(github.event.changes)}}"
           
           
