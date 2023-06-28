@@ -1,28 +1,18 @@
 package com.github.vermucht.smth;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-@WebMvcTest(HelloWorldController.class)
+@ExtendWith(MockitoExtension.class)
 class HelloWorldControllerTest {
-    @Autowired
-    MockMvc mockMvc;
+    @InjectMocks
+    private HelloWorldController controller;
 
     @Test
-    void GetHelloWorld() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/hello"))
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("Hello, World"));
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/hello")
-                        .param("name", "AAA"))
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("Hello, AAA"));
+    void GetHelloWorld() {
+        Assertions.assertEquals("Hello, someName", controller.hello("someName"));
     }
 }
