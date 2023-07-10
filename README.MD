@@ -1,4 +1,4 @@
-[![Workflow on push](https://github.com/aleksei-sapozhnikov/smth/actions/workflows/onpush-action.yml/badge.svg)](https://github.com/aleksei-sapozhnikov/smth/actions/workflows/onpush-action.yml)
+[![Workflow on push](https://github.com/aleksei-sapozhnikov/smth/actions/workflows/onpush-action.yml/badge.svg?branch=master)](https://github.com/aleksei-sapozhnikov/smth/actions/workflows/onpush-action.yml)
 
 # Learning something
 
