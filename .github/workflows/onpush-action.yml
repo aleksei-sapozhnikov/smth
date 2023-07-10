@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print environment
-        run: echo "${{ toJSON(github) }}"
+        run: echo "environment"
   test:
     runs-on: ubuntu-latest
     steps:
