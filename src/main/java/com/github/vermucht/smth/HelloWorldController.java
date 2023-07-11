@@ -10,7 +10,6 @@ public class HelloWorldController {
     public HelloWorldController() {
     }
 
-    // Change
     @GetMapping("/hello")
     public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
         return "Hello, %s".formatted(name);
