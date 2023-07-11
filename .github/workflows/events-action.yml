@@ -1,0 +1,29 @@
+name: Workflow on push
+on:
+  pull_request:
+    types:
+      - opened
+      - review_requested
+    branches:
+      - master
+    paths-ignore:
+      - '.github/workflows/*'
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - '.github/workflows/*'
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download source code
+        run: echo "Download source code"
+      - name: Setup Java
+        run: echo "Setup Java"
+      - name: Setup Gradle
+        run: echo "Setup Gradle"
+      - name: Build project
+        run: echo "Build project"
+      - name: Deploy
+        run: echo "Deploy"
