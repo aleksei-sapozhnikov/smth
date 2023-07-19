@@ -42,7 +42,7 @@ jobs:
         with:
           name: Build directory and HELP.md
           path: |
-            build/
+            build/libs/*
             HELP.md
   deploy:
     needs: build
