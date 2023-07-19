@@ -26,7 +26,7 @@ jobs:
       - name: Run unit tests
         run: ./gradlew test
   build:
-    needs: test
+#    needs: test
     runs-on: ubuntu-latest
     outputs:
       script-file: ${{ steps.pub.outputs.res }}
