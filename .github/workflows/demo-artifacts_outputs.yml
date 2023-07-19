@@ -10,7 +10,7 @@ jobs:
         uses: axel-op/googlejavaformat-action@v3.6.0
         with:
           args: "--replace"
-          skip-commit: true
+          skipCommit: true
       - name: Print format diffs
         run: git --no-pager diff --exit-code
       - name: Setup Java
