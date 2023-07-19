@@ -37,14 +37,20 @@ jobs:
         uses: gradle/gradle-build-action@v2
       - name: Build project
         run: ./gradlew build
-      - name: Upload a Build Artifact
+      - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: Libs built
+          name: Build artifacts
           path: build/libs/*
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Get build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: Build artifacts
+      - name: Output artifact contents
+        run: ls
       - name: Deploy
         run: echo "Deploying..."
