@@ -32,7 +32,7 @@ jobs:
         run: |
           echo "Searching for 'smth-0.0.1.jar' or 'smth-0.0.1-SNAPSHOT.jar' (exluding e.g. 'smth-0.0.1-SNAPSHOT-plain.jar')"
           reg_exp='.*\/[a-z].+-[0-9]{1,5}\.0\.1-SNAPSHOT?\.jar'
-          find ./build/libs/*.jar -regex $reg_exp -execdir echo 'res={}' >> $GITHUB_OUTPUT ';'
+          find ./build/libs/*.jar -regextype posix -regex $reg_exp -execdir echo 'res={}' >> $GITHUB_OUTPUT ';'
 #       - name: Upload build artifacts
 #        uses: actions/upload-artifact@v3
 #        with:
