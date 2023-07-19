@@ -35,24 +35,21 @@ jobs:
           full_regex=".*\/$filename_regex"
           echo Full RegEx: "$full_regex"
           find ./build/libs/*.jar -regextype posix-extended -regex "$full_regex" -execdir echo 'res={}' >> $GITHUB_OUTPUT ';'
-#       - name: Upload build artifacts
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: Build artifacts
-#          path: build/libs/*
-#  #          path: |
-#  #            build/libs/*
-#  #            README.md
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Build artifacts
+          path: build/libs/*
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-#      - name: Get build artifacts
-#        uses: actions/download-artifact@v3
-#        with:
-#          name: Build artifacts
-#      - name: Print build artifact contents
-#        run: ls
+      - name: Get build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: Build artifacts
+      - name: Print build artifact contents
+        run: ls
       - name: Print build result file name
         run: echo "${{ needs.build.outputs.script-file }}"
       - name: Deploy
