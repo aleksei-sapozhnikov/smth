@@ -4,35 +4,20 @@ on:
 #    branches:
 #      - master
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download source code
-        uses: actions/checkout@v3
-      - name: Google Java Format
-        uses: axel-op/googlejavaformat-action@v3.6.0
-        with:
-          args: "--replace"
-          skipCommit: true
-      - name: Print format diffs
-        run: git --no-pager diff --exit-code
-      - name: Setup Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: temurin
-          java-version: 17
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-      - name: Run unit tests
-        run: ./gradlew test
   build:
-#    needs: test
     runs-on: ubuntu-latest
     outputs:
       script-file: ${{ steps.pub.outputs.res }}
     steps:
       - name: Download source code
         uses: actions/checkout@v3
+      - name: Check Google Java Format
+        uses: axel-op/googlejavaformat-action@v3.6.0
+        with:
+          args: "--replace"
+          skipCommit: true
+      - name: Print format diffs and fail if not all formatted
+        run: git --no-pager diff --exit-code
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
@@ -66,6 +51,6 @@ jobs:
       - name: Print build artifact contents
         run: ls
       - name: Print build result file name
-        run:  echo "${{ needs.build.outputs.res }}
+        run:  echo "${{ needs.build.outputs.script-file }}
       - name: Deploy
         run: echo "Deploying..."
