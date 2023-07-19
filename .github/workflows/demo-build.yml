@@ -1,5 +1,9 @@
 name: Demo - build project
-on: [push, workflow_dispatch]
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
 jobs:
   output_environment:
     runs-on: ubuntu-latest
