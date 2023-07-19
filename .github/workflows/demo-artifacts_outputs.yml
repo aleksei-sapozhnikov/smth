@@ -50,7 +50,7 @@ jobs:
           name: Build artifacts
       - name: Print build artifact contents
         run: ls
-      - name: Print build result file name
-        run: echo "${{ needs.build.outputs.script-file }}"
       - name: Deploy
-        run: echo "Deploying..."
+        run: |
+          build_output="${{ needs.build.outputs.script-file }}"
+          echo "Deploying $build_output"
