@@ -40,10 +40,8 @@ jobs:
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: Build directory and HELP.md
-          path: |
-            build/libs/*
-            HELP.md
+          name: Libs built
+          path: build/libs/*
   deploy:
     needs: build
     runs-on: ubuntu-latest
