@@ -13,11 +13,16 @@ class SmthApplicationTests {
   /** Checks if all needed environment variables are set. Appeared on studying GitHub Actions. */
   @Test
   void envVarIsSet() {
-    String isCheck = System.getenv("IS_TEST_ENVIRONMENT");
-    if (!"true".equals(isCheck)) {
+    if (!"true".equals(System.getenv("IS_TEST_ENVIRONMENT"))) {
       return;
     }
-    String envVar = System.getenv("ENV_VAR");
-    Assertions.assertTrue(envVar != null && envVar.length() > 0);
+    Assertions.assertTrue(isNotEmpty(System.getenv("ENV_VAR")));
+    Assertions.assertTrue(isNotEmpty(System.getenv("REPO_VARIABLE")));
+    Assertions.assertTrue(isNotEmpty(System.getenv("REPO_SECRET")));
+    Assertions.assertNotEquals("***", System.getenv("REPO_SECRET"));
+  }
+
+  private static boolean isNotEmpty(String envVar) {
+    return envVar != null && envVar.length() > 0;
   }
 }
