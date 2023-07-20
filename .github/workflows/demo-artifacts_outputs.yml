@@ -17,6 +17,13 @@ jobs:
           cache: gradle
       - name: Test project
         run: gradle test
+      - name: (Demo) cache file
+        uses: actions/cache@v3
+        with:
+          key: gradle-${{github.run_number}}-${{hashFiles('**/build.gradle')}}
+          path: ~/test-file.txt
+      - name: (Demo) create cached file
+        run: echo "Test file contents" > ~/test-file.txt
   build:
     needs: test
     runs-on: ubuntu-latest
@@ -62,13 +69,13 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: (Demo) Try get gradle files from cache
+      - name: (Demo) Get test file from cache
         uses: actions/cache@v3
         with:
           key: gradle-${{github.run_number}}-${{hashFiles('**/build.gradle')}}
-          path: ~/.gradle
-      - name: Print build.gradle file contents
-        run: ls
+          path: ~/test-file.txt
+      - name: (Demo) Print test file
+        run: cat ~/test-file.txt
       - name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
