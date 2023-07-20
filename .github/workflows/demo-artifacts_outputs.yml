@@ -39,11 +39,6 @@ jobs:
           skipCommit: true
       - name: Print format diffs and fail if not all formatted
         run: git --no-pager diff --exit-code
-      - name: (Demo) Cache gradle files for this build
-        uses: actions/cache@v3
-        with:
-          key: gradle-${{github.run_number}}-${{hashFiles('**/build.gradle')}}
-          path: ~/.gradle
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
