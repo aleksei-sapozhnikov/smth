@@ -21,9 +21,8 @@ class SmthApplicationTests {
       return;
     }
     Assertions.assertTrue(isNotEmpty(System.getenv("ENV_VAR")));
-    Assertions.assertTrue(isNotEmpty(System.getenv("REPO_VARIABLE")));
-    Assertions.assertTrue(isNotEmpty(System.getenv("REPO_SECRET")));
-    Assertions.assertNotEquals("***", System.getenv("REPO_SECRET"));
+    Assertions.assertEquals("Repository variable", System.getenv("REPO_VARIABLE"));
+    Assertions.assertEquals("Repository secret", System.getenv("REPO_VARIABLE"));
   }
 
   private static boolean isNotEmpty(String envVar) {
