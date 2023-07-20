@@ -15,8 +15,11 @@ jobs:
           distribution: temurin
           java-version: 17
           cache: gradle
-#      - name: Setup Gradle
-#        uses: gradle/gradle-build-action@v2
+      - name: Cache compiled
+        uses: actions/cache@v3
+        with:
+          path: build/
+          key: compiled-${{github.run_number}}
       - name: Test project
         run: gradle test --no-daemon
   build:
@@ -34,19 +37,17 @@ jobs:
           skipCommit: true
       - name: Print format diffs and fail if not all formatted
         run: git --no-pager diff --exit-code
-      - name: Cache dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.gradle
-          key: custom-cache-${{ hashFiles('**/build.gradle') }}
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: 17
           cache: gradle
-#      - name: Setup Gradle
-#        uses: gradle/gradle-build-action@v2
+      - name: Cache compiled
+        uses: actions/cache@v3
+        with:
+          path: build/
+          key: compiled-${{github.run_number}}
       - name: Build project
         run: gradle build --no-daemon
       - name: Publish result jar as output
