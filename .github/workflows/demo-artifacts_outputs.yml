@@ -9,22 +9,16 @@ jobs:
     steps:
       - name: Download source code
         uses: actions/checkout@v3
-      - name: Print cache file key
-        run: echo "custom-cache-${{ hashFiles('**/build.gradle') }}"
-      - name: Cache dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.gradle
-          key: custom-cache-${{ hashFiles('**/build.gradle') }}
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: 17
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
+          cache: gradle
+#      - name: Setup Gradle
+#        uses: gradle/gradle-build-action@v2
       - name: Test project
-        run: ./gradlew test --no-daemon
+        run: gradle test --no-daemon
   build:
     needs: test
     runs-on: ubuntu-latest
@@ -46,14 +40,15 @@ jobs:
           path: ~/.gradle
           key: custom-cache-${{ hashFiles('**/build.gradle') }}
       - name: Setup Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v3]
         with:
           distribution: temurin
           java-version: 17
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
+          cache: gradle
+#      - name: Setup Gradle
+#        uses: gradle/gradle-build-action@v2
       - name: Build project
-        run: ./gradlew build --no-daemon
+        run: gradle build --no-daemon
       - name: Publish result jar as output
         id: pub
         run: |
