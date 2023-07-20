@@ -16,7 +16,7 @@ jobs:
           java-version: 17
           cache: gradle
       - name: Test project
-        run: gradle test --no-daemon
+        run: gradle test
   build:
     needs: test
     runs-on: ubuntu-latest
@@ -44,7 +44,7 @@ jobs:
           java-version: 17
           cache: gradle
       - name: Build project
-        run: gradle build --no-daemon
+        run: gradle build
       - name: Publish result jar as output
         id: pub
         run: |
@@ -68,7 +68,7 @@ jobs:
           key: gradle-${{github.run_number}}-${{hashFiles('**/build.gradle')}}
           path: ~/.gradle
       - name: Print build.gradle file contents
-        run: cat build.gradle
+        run: cat ~/build.gradle
       - name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
