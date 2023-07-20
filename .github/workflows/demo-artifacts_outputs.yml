@@ -9,6 +9,13 @@ jobs:
     steps:
       - name: Download source code
         uses: actions/checkout@v3
+      - name: Print cache file key
+        run: echo "custom-cache-${{ hashFiles('**/build.gradle') }}"
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~./gradle
+          key: custom-cache-${{ hashFiles('**/build.gradle') }}
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
@@ -17,7 +24,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
       - name: Test project
-        run: ./gradlew test
+        run: ./gradlew test --no-daemon
   build:
     needs: test
     runs-on: ubuntu-latest
@@ -33,6 +40,11 @@ jobs:
           skipCommit: true
       - name: Print format diffs and fail if not all formatted
         run: git --no-pager diff --exit-code
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~./gradle
+          key: custom-cache-${{ hashFiles('**/build.gradle') }}
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
@@ -41,7 +53,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
       - name: Build project
-        run: ./gradlew build
+        run: ./gradlew build --no-daemon
       - name: Publish result jar as output
         id: pub
         run: |
