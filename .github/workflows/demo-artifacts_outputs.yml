@@ -9,11 +9,6 @@ jobs:
     steps:
       - name: Download source code
         uses: actions/checkout@v3
-      - name: (Demo) Cache gradle files for this build (not needed, done by setup-java)
-        uses: actions/cache@v3
-        with:
-          key: gradle-${{github.run_number}}
-          path: ~/.gradle
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
@@ -40,7 +35,7 @@ jobs:
       - name: (Demo) Cache gradle files for this build
         uses: actions/cache@v3
         with:
-          key: gradle-${{github.run_number}}
+          key: gradle-${{github.run_number}}-${{hashFiles('**/build.gradle')}}
           path: ~/.gradle
       - name: Setup Java
         uses: actions/setup-java@v3
@@ -67,7 +62,14 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Get build artifacts
+      - name: (Demo) Try get gradle files from cache
+        uses: actions/cache@v3
+        with:
+          key: gradle-${{github.run_number}}-${{hashFiles('**/build.gradle')}}
+          path: ~/.gradle
+      - name: Print build.gradle file contents
+        run: cat build.gradle
+      - name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
           name: Build artifacts
