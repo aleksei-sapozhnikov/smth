@@ -8,11 +8,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 class HelloWorldControllerTest {
-    @InjectMocks
-    private HelloWorldController controller;
+  @InjectMocks private HelloWorldController controller;
 
-    @Test
-    void GetHelloWorld() {
-        Assertions.assertEquals("Hello, someName", controller.hello("someName"));
-    }
+  @Test
+  void GetHelloWorld() {
+    Assertions.assertEquals("Hello, someName", controller.hello("someName"));
+  }
 }

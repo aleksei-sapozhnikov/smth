@@ -1,4 +1,4 @@
-name: Workflow on push
+name: Demo - on PR types; branches; ignored files
 on:
   pull_request:
     types:

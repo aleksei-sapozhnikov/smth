@@ -1,0 +1,71 @@
+name: Demo - artifacts, outputs
+on:
+  push:
+#    branches:
+#      - master
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download source code
+        uses: actions/checkout@v3
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+      - name: Test project
+        run: ./gradlew test
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    outputs:
+      script-file: ${{ steps.pub.outputs.res }}
+    steps:
+      - name: Download source code
+        uses: actions/checkout@v3
+      - name: Check Google Java Format
+        uses: axel-op/googlejavaformat-action@v3.6.0
+        with:
+          args: "--replace"
+          skipCommit: true
+      - name: Print format diffs and fail if not all formatted
+        run: git --no-pager diff --exit-code
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+      - name: Build project
+        run: ./gradlew build
+      - name: Publish result jar as output
+        id: pub
+        run: |
+          echo "Searching for 'smth-0.0.1.jar' or 'smth-0.0.1-SNAPSHOT.jar' (excluding e.g. 'smth-0.0.1-SNAPSHOT-plain.jar')"
+          filename_regex="[a-z].+-[0-9.]{1,8}-SNAPSHOT?\.jar"
+          full_regex=".*\/$filename_regex"
+          echo Full RegEx: "$full_regex"
+          find ./build/libs/*.jar -regextype posix-extended -regex "$full_regex" -execdir echo 'res={}' >> $GITHUB_OUTPUT ';'
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Build artifacts
+          path: build/libs/*
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: Build artifacts
+      - name: Print build artifact contents
+        run: ls
+      - name: Deploy
+        run: |
+          build_output="${{ needs.build.outputs.script-file }}"
+          echo "Deploying $build_output"
