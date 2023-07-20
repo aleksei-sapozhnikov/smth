@@ -18,7 +18,9 @@ jobs:
       - name: Cache compiled
         uses: actions/cache@v3
         with:
-          path: build/
+          path: |
+            build/
+            .gradle/
           key: compiled-${{github.run_number}}
       - name: Test project
         run: gradle test --no-daemon
@@ -46,8 +48,9 @@ jobs:
       - name: Cache compiled
         uses: actions/cache@v3
         with:
-          path: build/
-          key: compiled-${{github.run_number}}
+          path: |
+            build/
+            .gradle/
       - name: Build project
         run: gradle build --no-daemon
       - name: Publish result jar as output
