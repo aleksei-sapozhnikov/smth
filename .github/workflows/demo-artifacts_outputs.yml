@@ -30,7 +30,7 @@ jobs:
       - name: Publish result jar as output
         id: pub
         run: |
-          echo "Searching for 'smth-0.0.1.jar' or 'smth-0.0.1-SNAPSHOT.jar' (exluding e.g. 'smth-0.0.1-SNAPSHOT-plain.jar')"
+          echo "Searching for 'smth-0.0.1.jar' or 'smth-0.0.1-SNAPSHOT.jar' (excluding e.g. 'smth-0.0.1-SNAPSHOT-plain.jar')"
           filename_regex="[a-z].+-[0-9.]{1,8}-SNAPSHOT?\.jar"
           full_regex=".*\/$filename_regex"
           echo Full RegEx: "$full_regex"
