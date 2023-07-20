@@ -9,19 +9,17 @@ jobs:
     steps:
       - name: Download source code
         uses: actions/checkout@v3
+      - name: (Demo) Cache gradle files for this build (not needed, done by setup-java)
+        uses: actions/cache@v3
+        with:
+          key: gradle-${{github.run_number}}
+          path: ~/.gradle
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: 17
           cache: gradle
-      - name: Cache compiled
-        uses: actions/cache@v3
-        with:
-          key: compiled-${{github.run_number}}
-          path: |
-            ~/build
-            ~/.gradle
       - name: Test project
         run: gradle test --no-daemon
   build:
@@ -39,19 +37,17 @@ jobs:
           skipCommit: true
       - name: Print format diffs and fail if not all formatted
         run: git --no-pager diff --exit-code
+      - name: (Demo) Cache gradle files for this build
+        uses: actions/cache@v3
+        with:
+          key: gradle-${{github.run_number}}
+          path: ~/.gradle
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: 17
           cache: gradle
-      - name: Cache compiled
-        uses: actions/cache@v3
-        with:
-          key: compiled-${{github.run_number}}
-          path: |
-            ~/build
-            ~/.gradle
       - name: Build project
         run: gradle build --no-daemon
       - name: Publish result jar as output
