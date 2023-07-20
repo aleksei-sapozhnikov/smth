@@ -68,7 +68,7 @@ jobs:
           key: gradle-${{github.run_number}}-${{hashFiles('**/build.gradle')}}
           path: ~/.gradle
       - name: Print build.gradle file contents
-        run: cat ~/build.gradle
+        run: ls
       - name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
