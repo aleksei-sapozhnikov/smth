@@ -2,7 +2,7 @@ name: Demo - artifacts, outputs
 on:
   push:
 #    branches:
-#      - master
+#       - master
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -14,10 +14,16 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
+          cache: gradle
       - name: Test project
-        run: ./gradlew test
+        run: gradle test
+      - name: Cache test file (cache demo)
+        uses: actions/cache@v3
+        with:
+          key: gradle-${{github.run_number}}-${{hashFiles('**/build.gradle')}}
+          path: ~/test-file.txt
+      - name: Create test file (cache demo)
+        run: echo "Test file contents" > ~/test-file.txt
   build:
     needs: test
     runs-on: ubuntu-latest
@@ -38,10 +44,9 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
+          cache: gradle
       - name: Build project
-        run: ./gradlew build
+        run: gradle build
       - name: Publish result jar as output
         id: pub
         run: |
@@ -59,7 +64,14 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Get build artifacts
+      - name: Get test file (cache demo)
+        uses: actions/cache@v3
+        with:
+          key: gradle-${{github.run_number}}-${{hashFiles('**/build.gradle')}}
+          path: ~/test-file.txt
+      - name: Print test file (cache demo)
+        run: cat ~/test-file.txt
+      - name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
           name: Build artifacts
