@@ -20,8 +20,8 @@ jobs:
         with:
           key: compiled-${{github.run_number}}
           path: |
-            build/
-            .gradle/
+            ~/build
+            ~/.gradle
       - name: Test project
         run: gradle test --no-daemon
   build:
