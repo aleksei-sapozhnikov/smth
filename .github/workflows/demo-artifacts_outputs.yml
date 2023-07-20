@@ -17,12 +17,12 @@ jobs:
           cache: gradle
       - name: Test project
         run: gradle test
-      - name: (Demo) cache file
+      - name: Cache test file (cache demo)
         uses: actions/cache@v3
         with:
           key: gradle-${{github.run_number}}-${{hashFiles('**/build.gradle')}}
           path: ~/test-file.txt
-      - name: (Demo) create cached file
+      - name: Create test file (cache demo)
         run: echo "Test file contents" > ~/test-file.txt
   build:
     needs: test
@@ -64,12 +64,12 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: (Demo) Get test file from cache
+      - name: Get test file (cache demo)
         uses: actions/cache@v3
         with:
           key: gradle-${{github.run_number}}-${{hashFiles('**/build.gradle')}}
           path: ~/test-file.txt
-      - name: (Demo) Print test file
+      - name: Print test file (cache demo)
         run: cat ~/test-file.txt
       - name: Download build artifacts
         uses: actions/download-artifact@v3
