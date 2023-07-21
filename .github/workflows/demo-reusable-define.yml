@@ -5,7 +5,6 @@ on:
       var1:
         description: First variable to print
         required: true
-        default: var1 from define
         type: string
       var2:
         description: Second variable to print

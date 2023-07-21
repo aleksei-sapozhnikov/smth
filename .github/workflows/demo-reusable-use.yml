@@ -6,8 +6,11 @@ on:
 jobs:
   deploy-default:
     uses: ./.github/workflows/demo-reusable-define.yml
+    with:
+      var1: var1 from user
   deploy:
     uses: ./.github/workflows/demo-reusable-define.yml
     with:
       var1: var1 from user
+      var2: var2 from user
       var3: 10
