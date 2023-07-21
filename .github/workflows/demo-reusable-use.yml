@@ -30,7 +30,9 @@ jobs:
       output2: ${{ steps.step2.outputs.test }}
     steps:
       - id: step1
-        run: echo "test=hello" >> "$GITHUB_OUTPUT"
+        run: |
+          echo "test=hello" >> "$GITHUB_OUTPUT"
+          echo ${{needs.job1.outputs.output1}}
       - id: step2
         run: echo "test=world" >> "$GITHUB_OUTPUT"
   job2:
