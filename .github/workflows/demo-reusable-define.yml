@@ -21,13 +21,13 @@ on:
         description: A sample secret
         required: false
     outputs:
-      deploy-result:
+      result:
         description: Workflow result output
-        value: ${{jobs.deploy.deploy-outcome}}
+        value: ${{jobs.deploy.outcome}}
 jobs:
   deploy:
     outputs:
-      deploy-outcome: ${{steps.set-result.outputs.deploy-result}}
+      outcome: ${{steps.set-result.outputs.out}}
     runs-on: ubuntu-latest
     steps:
       - name: Print params
@@ -38,4 +38,4 @@ jobs:
           echo "secret1 = ${{ secrets.secret1 }}"
       - name: Set result output
         id: set-result
-        run: echo "deploy-result=Called with var1=${{inputs.var1}}, var2=${{inputs.var2}}, var3=${{inputs.var3}}" >> $GITHUB_OUTPUT
+        run: echo "out=Called with var1=${{inputs.var1}}, var2=${{inputs.var2}}, var3=${{inputs.var3}}" >> $GITHUB_OUTPUT
