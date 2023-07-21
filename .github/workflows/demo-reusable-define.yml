@@ -10,12 +10,12 @@ on:
         description: Second variable to print
         required: false
         type: string
-        default: var2 from define
+        default: default var2
       var3:
         description: Third variable to print
         required: false
         type: number
-        default: 5
+        default: 1
 jobs:
   deploy:
     runs-on: ubuntu-latest
