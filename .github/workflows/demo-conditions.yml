@@ -24,4 +24,8 @@ jobs:
         with:
           name: test report
           path: build/reports/tests/test
-
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print echo
+        run: echo ...
