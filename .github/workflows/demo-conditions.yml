@@ -19,7 +19,7 @@ jobs:
         id: run-tests
         run: gradle test
       - name: Upload test report
-        if: steps.run-steps.outcome == 'failure'
+        if: failure() && steps.run-steps.outcome == 'failure'
         uses: actions/upload-artifact@v3
         with:
           name: test report
