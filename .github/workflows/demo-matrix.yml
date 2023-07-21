@@ -1,0 +1,32 @@
+name: Demo - matrix
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    continue-on-error: true
+    strategy:
+      matrix:
+        java: [ 8, 11, 17 ]
+        runner: [ ubuntu-latest, windows-latest ]
+        include:
+          - java: 19
+            runner: ubuntu-latest
+          - java: 19
+            runner: windows-latest
+        exclude:
+          - java: 8
+            runner: windows-latest
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - name: Download source code
+        uses: actions/checkout@v3
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.java }}
+          cache: gradle
+      - name: Run test
+        run: gradle test
