@@ -42,6 +42,7 @@ jobs:
         run: echo "out=success" >> $GITHUB_OUTPUT
   print-res:
     runs-on: ubuntu-latest
+    needs: deploy
     steps:
       - name: print
         run: echo ${{steps.set-result.outputs.out}}
