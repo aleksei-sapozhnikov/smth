@@ -31,6 +31,7 @@ jobs:
       - name: Print echo
         run: echo ...
   report-fail:
+    needs: [test, deploy]
     if: failure()
     runs-on: ubuntu-latest
     steps:
