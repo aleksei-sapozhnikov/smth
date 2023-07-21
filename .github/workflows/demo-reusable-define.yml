@@ -39,6 +39,6 @@ jobs:
       - name: Set result output
         id: set-result
         run: |
-          str="Deploy called with var1=${{inputs.var1}}, var2=${{inputs.var2}}, var3=${{inputs.var3}}"
+          str="Deploy called with var1 = ${{inputs.var1}}; var2 = ${{inputs.var2}}, var3 = ${{inputs.var3}}"
           echo "out=$str" >> $GITHUB_OUTPUT
 
