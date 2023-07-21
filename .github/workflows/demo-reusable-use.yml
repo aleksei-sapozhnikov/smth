@@ -21,4 +21,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print deploy output
-        run: echo "${{needs.deploy.outputs.result}}"
+        run: echo "${{needs.deploy.outputs.outcome}}"
