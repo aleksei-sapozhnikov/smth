@@ -15,6 +15,9 @@ jobs:
             runner: ubuntu-latest
           - java: 19
             runner: windows-latest
+        exclude:
+          - java: 8
+            runner: windows-latest
     runs-on: ${{ matrix.runner }}
     steps:
       - name: Download source code
