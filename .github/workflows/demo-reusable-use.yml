@@ -1,0 +1,24 @@
+name: Demo - using reusable workflow
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy-default:
+    uses: ./.github/workflows/demo-reusable-define.yml
+    with:
+      var1: caller var1
+  deploy:
+    uses: ./.github/workflows/demo-reusable-define.yml
+    with:
+      var1: caller var1
+      var2: caller var2
+      var3: 343
+    secrets:
+      secret1: caller secret
+  print-deploy-result:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print deploy output
+        run: echo "${{needs.deploy.outputs.result}}"

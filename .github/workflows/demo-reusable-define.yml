@@ -1,0 +1,44 @@
+name: Demo - reusable workflow (deploy)
+on:
+  workflow_call:
+    inputs:
+      var1:
+        description: First variable to print
+        required: true
+        type: string
+      var2:
+        description: Second variable to print
+        required: false
+        type: string
+        default: default var2
+      var3:
+        description: Third variable to print
+        required: false
+        type: number
+        default: 1
+    secrets:
+      secret1:
+        description: A sample secret
+        required: false
+    outputs:
+      result:
+        description: Workflow result output
+        value: ${{jobs.deploy-perform.outputs.outcome}}
+jobs:
+  deploy-perform:
+    outputs:
+      outcome: ${{steps.set-result.outputs.out}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print params
+        run: |
+          echo "var1 = ${{inputs.var1}}"
+          echo "var2 = ${{inputs.var2}}"
+          echo "var3 = ${{inputs.var3}}"
+          echo "secret1 = ${{secrets.secret1}}"
+      - name: Set result output
+        id: set-result
+        run: |
+          str="Deploy called with var1 = ${{inputs.var1}}; var2 = ${{inputs.var2}}; var3 = ${{inputs.var3}}"
+          echo "out=$str" >> $GITHUB_OUTPUT
+
