@@ -5,10 +5,14 @@ on:
 #      - master
 jobs:
   build:
+    continue-on-error: true
     strategy:
       matrix:
         java: [ 8, 11, 17 ]
         runner: [ ubuntu-latest, windows-latest ]
+        include:
+          - java: 19
+            runner: ubuntu-latest
     runs-on: ${{ matrix.runner }}
     steps:
       - name: Download source code
@@ -20,4 +24,4 @@ jobs:
           java-version: ${{ matrix.java }}
           cache: gradle
       - name: Run test
-        run: echo "Running tests"
+        run: gradle test
