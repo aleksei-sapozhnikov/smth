@@ -41,7 +41,11 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
-      - name: Purposefully fail this job
+      - name: Purposefully fail this step
+        id: p-fail
         run: exit 1
-      - name: Next step after failing (won't be executed)
-        run: echo "Next step after failing"
+      - name: Standard next step after failing
+        run: echo "Standard next step after failing"
+      - name: Next step to run on step fail (conclusion after continue-on-error should be success)
+        if: steps.p-fail.conclusion = 'success'
+        run: echo Conditional next step after failing
