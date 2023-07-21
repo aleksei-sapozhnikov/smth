@@ -47,5 +47,5 @@ jobs:
       - name: Standard next step after failing
         run: echo "Standard next step after failing"
       - name: Next step to run on step fail (conclusion after continue-on-error should be success)
-        if: steps.p-fail.conclusion = 'success'
+        if: steps.p-fail.conclusion == 'success'
         run: echo Conditional next step after failing
