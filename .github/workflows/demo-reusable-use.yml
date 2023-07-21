@@ -7,7 +7,7 @@ jobs:
   deploy-default:
     uses: ./.github/workflows/demo-reusable-define.yml
     with:
-      var1: var1 from user
+      var1: caller var1
   deploy:
     uses: ./.github/workflows/demo-reusable-define.yml
     with:
