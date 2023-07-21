@@ -37,11 +37,11 @@ jobs:
     steps:
       - name: Print report
         run: echo "Success report"
-  failed-testing-continue-on-error:
+  failed-job-with-continue-on-error:
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
       - name: Purposefully fail this job
         run: exit 1
-      - name: Next step after failing
+      - name: Next step after failing (won't be executed)
         run: echo "Next step after failing"
