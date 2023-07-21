@@ -4,8 +4,10 @@ on:
 #    branches:
 #      - master
 jobs:
+  deploy-default:
+    uses: ./.github/workflows/demo-reusable-define.yml
   deploy:
-    uses: ./.github/workflows/demo-reusable.yml
+    uses: ./.github/workflows/demo-reusable-define.yml
     with:
       var1: var1 from user
       var3: 10
