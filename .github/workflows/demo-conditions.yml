@@ -1,0 +1,25 @@
+name: Demo - conditions in workflows
+on:
+  push:
+#    branches:
+#      - master
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download source code
+        uses: actions/checkout@v3
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: gradle
+      - name: Run test tests
+        run: gradle test
+      - name: Upload test report
+        uses: actions/upload-artifact@v3
+        with:
+          name: test report
+          path: build/reports/tests/test/index.html
+
