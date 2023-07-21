@@ -15,4 +15,4 @@ jobs:
       var2: caller var2
       var3: 343
     secrets:
-      secret1: aaabbb
+      secret1: caller secret

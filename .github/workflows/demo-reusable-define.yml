@@ -18,7 +18,8 @@ on:
         default: 1
     secrets:
       secret1:
-        required: true
+        description: A sample secret
+        required: false
 jobs:
   deploy:
     runs-on: ubuntu-latest
