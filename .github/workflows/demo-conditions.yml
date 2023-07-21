@@ -22,9 +22,10 @@ jobs:
         if: failure() && steps.run-tests.outcome == 'failure'
         uses: actions/upload-artifact@v3
         with:
-          name: test report
+          name: test-report
           path: build/reports/tests/test/*
   deploy:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Print echo
