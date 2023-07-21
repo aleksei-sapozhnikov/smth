@@ -38,8 +38,7 @@ jobs:
           echo "secret1 = ${{secrets.secret1}}"
       - name: Set result output
         id: set-result
-        #        run: echo "out=Called with var1=${{inputs.var1}}, var2=${{inputs.var2}}, var3=${{inputs.var3}}" >> $GITHUB_OUTPUT
-        run: echo "out=success" >> $GITHUB_OUTPUT
+        run: echo "out=Called with var1=${{inputs.var1}}, var2=${{inputs.var2}}, var3=${{inputs.var3}}" >> $GITHUB_OUTPUT
   print-res:
     runs-on: ubuntu-latest
     needs: deploy
