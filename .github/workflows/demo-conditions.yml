@@ -30,10 +30,10 @@ jobs:
     steps:
       - name: Print echo
         run: echo ...
-  report-fail:
+  success-report:
     needs: [test, deploy]
-    if: failure()
+    if: success()
     runs-on: ubuntu-latest
     steps:
       - name: Print report
-        run: echo "Fail report"
+        run: echo "Success report"
