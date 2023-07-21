@@ -39,4 +39,6 @@ jobs:
       - name: Set result output
         id: set-result
 #        run: echo "out=Called with var1=${{inputs.var1}}, var2=${{inputs.var2}}, var3=${{inputs.var3}}" >> $GITHUB_OUTPUT
-        run: echo "out=success" >> $GITHUB_OUTPUT
+        run: | 
+          echo "out=success" >> $GITHUB_OUTPUT
+          echo "${{steps.set-result.outputs.out}}"
