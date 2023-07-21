@@ -15,9 +15,11 @@ jobs:
           distribution: temurin
           java-version: 17
           cache: gradle
-      - name: Run test tests
+      - name: Run tests
+        id: run-tests
         run: gradle test
       - name: Upload test report
+        if: steps.run-steps.outcome == 'failure'
         uses: actions/upload-artifact@v3
         with:
           name: test report
