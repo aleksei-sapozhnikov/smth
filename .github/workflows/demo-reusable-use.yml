@@ -16,3 +16,9 @@ jobs:
       var3: 343
     secrets:
       secret1: caller secret
+  print-deploy-result:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print deploy output
+        run: echo "${{needs.deploy.outputs.deploy-result}}
