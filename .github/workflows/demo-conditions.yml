@@ -37,7 +37,7 @@ jobs:
     steps:
       - name: Print report
         run: echo "Success report"
-  failed-job-with-continue-on-error-step:
+  job-with-failed-step-and-continue-on-error:
     runs-on: ubuntu-latest
     steps:
       - name: Purposefully fail this step
