@@ -6,3 +6,6 @@ on:
 jobs:
   deploy:
     uses: ./.github/workflows/demo-reusable.yml
+    with:
+      var1: var1 from user
+      var3: 10

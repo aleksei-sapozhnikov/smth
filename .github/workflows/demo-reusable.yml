@@ -1,8 +1,27 @@
 name: Demo - reusable workflow (deploy)
-on: workflow_call
+on:
+  workflow_call:
+    inputs:
+      var1:
+        description: First variable to print
+        required: true
+        type: string
+      var2:
+        description: Second variable to print
+        required: false
+        type: string
+        default: var2 from reusable
+      var3:
+        description: Third variable to print
+        required: false
+        type: number
+        default: 5
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Print
-        run: echo "Making deploy"
+        run: |
+          echo "var1 = ${{inputs.var1}}"
+          echo "var2 = ${{inputs.var2}}"
+          echo "var3 = ${{inputs.var3}}"
