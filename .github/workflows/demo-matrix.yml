@@ -8,7 +8,7 @@ jobs:
     continue-on-error: true
     strategy:
       matrix:
-        java: [ 8, 11, 17 ]
+        java: [ 17 ]
         runner: [ ubuntu-latest, windows-latest ]
         include:
           - java: 19
@@ -16,7 +16,7 @@ jobs:
           - java: 19
             runner: windows-latest
         exclude:
-          - java: 8
+          - java: 17
             runner: windows-latest
     runs-on: ${{ matrix.runner }}
     steps:
