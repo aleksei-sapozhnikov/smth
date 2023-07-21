@@ -16,6 +16,9 @@ on:
         required: false
         type: number
         default: 1
+    secrets:
+      secret1:
+        required: true
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -25,3 +28,4 @@ jobs:
           echo "var1 = ${{inputs.var1}}"
           echo "var2 = ${{inputs.var2}}"
           echo "var3 = ${{inputs.var3}}"
+          echo "secret1 = ${{ secrets.secret1 }}"
