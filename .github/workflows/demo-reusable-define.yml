@@ -45,4 +45,4 @@ jobs:
     needs: deploy
     steps:
       - name: print
-        run: echo ${{steps.set-result.outputs.out}}
+        run: echo ${{needs.deploy.outputs.outcome}}
