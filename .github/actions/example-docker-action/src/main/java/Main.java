@@ -8,6 +8,7 @@ public class Main {
     System.out.println("var1 = " + var1);
     System.out.println("var2 = " + var2);
     System.out.println("number = " + number);
+    System.out.println("GITHUB_OUTPUT = " + System.getenv("GITHUB_OUTPU"));
     // check if guessed the number
     boolean guessed = "10".equals(number);
     System.out.println("guessed = " + guessed);
