@@ -8,6 +8,14 @@ inputs:
     description: Some variable 2
     required: false
     default: var2_COMMON
+  number:
+    description: Guess the number
+    required: false
+    default: '-1'
+outputs:
+  guessed-number:
+    description: Whether guessed the number
+    value: ${{steps.guessed-number.guessed}}
 runs:
   using: composite
   steps:
@@ -19,3 +27,9 @@ runs:
       run: |
         echo "var1 = ${{inputs.var1}}"
         echo "var2 = ${{inputs.var2}}"
+    - name: Return whether guessed the number\
+      id: guessed-number
+      shell: bash
+      run: |
+        if $number == 10 then guessed=true else guessed=false fi
+        echo "guessed=$guessed" >> GITHUB_OUTPUT
