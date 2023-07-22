@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'com.github.vermucht'
-version = '1'
+version = ''
 
 java {
     sourceCompatibility = '17'
