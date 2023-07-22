@@ -1,8 +1,8 @@
 name: Demo - using custom actions
 on:
   push:
-#    branches:
-#      - master
+    branches:
+      - master
 jobs:
   use-composed-action:
     runs-on: ubuntu-latest
