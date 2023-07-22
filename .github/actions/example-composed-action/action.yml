@@ -31,7 +31,7 @@ runs:
       id: guessed-number
       shell: bash
       run: |
-        if [$number == '10'] 
+        if [$number == '10'];
         then 
           guessed=true 
         else 
