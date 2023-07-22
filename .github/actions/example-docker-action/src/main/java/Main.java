@@ -1,5 +1,13 @@
+import static java.nio.file.StandardOpenOption.APPEND;
+import static java.nio.file.StandardOpenOption.WRITE;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
     // read inputs
     String var1 = getInput("var1");
     String var2 = getInput("var2");
@@ -14,7 +22,6 @@ public class Main {
     System.out.println("guessed = " + guessed);
     // set action output
     setOutput("guessed-number", String.valueOf(guessed));
-    System.out.println("guessed-number=" + guessed);
   }
 
   private static String getInput(String key) {
@@ -25,7 +32,9 @@ public class Main {
   }
 
   @SuppressWarnings("SameParameterValue")
-  private static void setOutput(String key, String value) {
-    System.out.printf("%s=%s >> $GITHUB_OUTPUT%n", key, value);
+  private static void setOutput(String key, String value) throws IOException {
+    Path outputPath = Paths.get(System.getenv("GITHUB_OUTPUT"));
+    Files.writeString(
+        outputPath, "%s=%s%s".formatted(key, value, System.lineSeparator()), WRITE, APPEND);
   }
 }
