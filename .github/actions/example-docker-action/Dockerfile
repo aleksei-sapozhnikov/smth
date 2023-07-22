@@ -57,4 +57,4 @@ RUN set -o errexit -o nounset \
     && echo "Testing Gradle installation" \
     && gradle --version
 
-CMD gradle build; ls; java -jar ./build/libs/action.jar
+CMD gradle build; cd build/libs; ls; java -jar ./build/libs/action.jar
