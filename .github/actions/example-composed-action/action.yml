@@ -37,4 +37,5 @@ runs:
         else 
           guessed=false 
         fi
+        echo $guessed
         echo "guessed=$guessed" >> $GITHUB_OUTPUT
