@@ -1,0 +1,22 @@
+name: Example Docker action
+description: Example Docker action
+inputs:
+  var1:
+    description: Some variable 1
+    required: true
+  var2:
+    description: Some variable 2
+    required: false
+    default: var2_COMMON
+  number:
+    description: Guess the number
+    required: false
+    default: '-1'
+outputs:
+  guessed-number:
+    description: Whether guessed the number
+  another-output:
+    description: Just another output to show several values can be output from Java code
+runs:
+  image: Dockerfile
+  using: docker

@@ -1,0 +1,47 @@
+name: Demo - using custom actions
+on:
+  push:
+    branches:
+      - master
+jobs:
+  use-composed-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Use custom action
+        id: use-action
+        uses: ./.github/actions/example-composed-action
+        with:
+          var1: var1_STEP
+          number: 10
+      - name: Output action result
+        run: echo 'Action result (guessed number):' "${{steps.use-action.outputs.guessed-number}}"
+  use-js-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Use JS action
+        id: use-action
+        uses: ./.github/actions/example-js-action
+        with:
+          var1: var1_STEP
+          number: 10
+      - name: Output action result
+        run: echo 'Action result (guessed number):' "${{steps.use-action.outputs.guessed-number}}"
+  use-docker-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Use Docker action (Java)
+        id: use-action
+        uses: ./.github/actions/example-docker-action
+        with:
+          var1: var1_STEP
+          number: 10
+      - name: Output action result
+        run: |
+          echo 'Action result (guessed number):' "${{steps.use-action.outputs.guessed-number}}"
+          echo 'Another output:' "${{steps.use-action.outputs.another-output}}"

@@ -1,0 +1,17 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.github.vermucht'
+version = ''
+
+java {
+    sourceCompatibility = '17'
+}
+
+jar {
+    archiveFileName.set('action.jar')
+    manifest {
+        attributes("Main-Class": 'Main')
+    }
+}
