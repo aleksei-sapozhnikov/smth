@@ -31,5 +31,10 @@ runs:
       id: guessed-number
       shell: bash
       run: |
-        if $number == 10 then guessed=true else guessed=false fi
+        if $number == 10 
+        then 
+          guessed=true 
+        else 
+          guessed=false 
+        fi
         echo "guessed=$guessed" >> GITHUB_OUTPUT
