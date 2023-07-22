@@ -14,5 +14,6 @@ jobs:
         uses: ./.github/actions/example-composed-action
         with:
           var1: var1_STEP
+          number: 10
       - name: Output action result
         run: echo 'Action result (guessed number):' "${{steps.use-action.outputs.guessed-number}}"
