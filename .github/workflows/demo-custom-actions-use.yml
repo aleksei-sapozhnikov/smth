@@ -1,4 +1,4 @@
-name: Demo - using reusable workflow
+name: Demo - using custom actions
 on:
   push:
 #    branches:

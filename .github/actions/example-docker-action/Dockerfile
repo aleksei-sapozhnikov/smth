@@ -58,5 +58,5 @@ RUN set -o errexit -o nounset \
     && gradle --version
 
 CMD gradle build
-CMD ls
-CMD java -jar ./build/libs/action.jar
+CMD pwd
+#CMD java -jar ./build/libs/action.jar
