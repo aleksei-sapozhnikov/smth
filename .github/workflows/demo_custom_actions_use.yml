@@ -4,14 +4,10 @@ on:
     branches:
       - master
 jobs:
-  use-composed-action-as-job:
-    uses: ./.github/actions/example-composed-action/action.yml
-    with:
-      var1: var1_JOB
-  use-composed-action-as-step:
+  use-composed-action:
     runs-on: ubuntu-latest
     steps:
       - name: Use custom action
-        uses: ./.github/actions/example-composed-action/action.yml
+        uses: ./.github/actions/example-composed-action
         with:
           var1: var1_STEP
