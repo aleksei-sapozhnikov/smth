@@ -3,7 +3,7 @@ import github from "@actions/github";
 import exec from "@actions/exec";
 
 function run() {
-    core.notice('### Running MAIN script');
+    core.notice('### Running MAIN logic');
 }
 
 run()
