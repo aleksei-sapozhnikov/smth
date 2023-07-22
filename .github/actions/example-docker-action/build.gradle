@@ -10,5 +10,5 @@ java {
 }
 
 jar {
-    archiveBaseName 'action'
+    archiveFileName.set('action.jar')
 }
