@@ -21,13 +21,13 @@ runs:
   steps:
     - name: Print build number
       shell: bash
-      run: echo ${{github.run_number}}
+      run: echo 'Build number:' "${{github.run_number}}"
     - name: Print variables
       shell: bash
       run: |
         echo "var1 = ${{inputs.var1}}"
         echo "var2 = ${{inputs.var2}}"
-    - name: Return whether guessed the number\
+    - name: Return whether guessed the number
       id: guessed-number
       shell: bash
       run: |

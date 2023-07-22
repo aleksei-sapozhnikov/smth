@@ -10,6 +10,9 @@ jobs:
       - name: Get code
         uses: actions/checkout@v3
       - name: Use custom action
+        id: use-action
         uses: ./.github/actions/example-composed-action
         with:
           var1: var1_STEP
+      - name: Output action result
+        run: echo 'Action result:' "${{steps.use-action.outputs.guessed}}"
