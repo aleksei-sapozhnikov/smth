@@ -1,0 +1,8 @@
+name: Demo - using reusable workflow
+on:
+  push:
+    branches:
+      - master
+jobs:
+  use-composed-action:
+    uses: ./.github/actions/example-composed-action/action.yml

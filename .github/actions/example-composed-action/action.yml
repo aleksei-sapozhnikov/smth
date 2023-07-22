@@ -1,0 +1,23 @@
+name: 'Example composed action'
+description: Simple action to show how it's done
+inputs:
+  var1:
+    description: Some variable 1
+    required: true
+  var2:
+    description: Some variable 2
+    required: false
+    default: var2_COMMON
+runs:
+  using: composite
+  steps:
+    - name: Get code
+      uses: actions/checkout@v3
+    - name: Print build number
+      shell: bash
+      run: echo ${{github.run_number}}
+    - name: Print variables
+      shell: bash
+      run: |
+        echo "var1 = $var1"
+        echo "var2 = $var2"
