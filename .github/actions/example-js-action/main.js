@@ -1,5 +1,7 @@
 import core from "@actions/core";
 
+run()
+
 function run() {
     core.notice('### Running MAIN logic');
 
@@ -15,5 +17,3 @@ function run() {
 
     core.setOutput('guessed-number', guessed);
 }
-
-run()
