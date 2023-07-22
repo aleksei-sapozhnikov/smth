@@ -17,3 +17,8 @@ jobs:
           number: 10
       - name: Output action result
         run: echo 'Action result (guessed number):' "${{steps.use-action.outputs.guessed-number}}"
+  use-js-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run JS action
+        uses: ./github/actions/example-js-action

@@ -1,5 +1,5 @@
 name: 'Example composed action'
-description: Simple action to show how it's done
+description: Example composed action
 inputs:
   var1:
     description: Some variable 1
