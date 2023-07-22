@@ -17,5 +17,5 @@ runs:
     - name: Print variables
       shell: bash
       run: |
-        echo "var1 = ${{inputs.var1}"
-        echo "var2 = ${{inputs.var2}"
+        echo "var1 = ${{inputs.var1}}"
+        echo "var2 = ${{inputs.var2}}"
