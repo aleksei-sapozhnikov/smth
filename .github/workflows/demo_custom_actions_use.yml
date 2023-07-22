@@ -15,4 +15,4 @@ jobs:
         with:
           var1: var1_STEP
       - name: Output action result
-        run: echo 'Action result:' "${{steps.use-action.outputs.guessed}}"
+        run: echo 'Action result (guessed number):' "${{steps.use-action.outputs.guessed-number}}"

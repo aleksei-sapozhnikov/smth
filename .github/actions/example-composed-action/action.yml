@@ -15,7 +15,7 @@ inputs:
 outputs:
   guessed-number:
     description: Whether guessed the number
-    value: ${{steps.guessed-number.outputs.guessed}}
+    value: ${{steps.guess-number.outputs.guessed}}
 runs:
   using: composite
   steps:
@@ -28,7 +28,7 @@ runs:
         echo "var1 = ${{inputs.var1}}"
         echo "var2 = ${{inputs.var2}}"
     - name: Return whether guessed the number
-      id: guessed-number
+      id: guess-number
       shell: bash
       run: |
         if [[ $number == '10' ]]
