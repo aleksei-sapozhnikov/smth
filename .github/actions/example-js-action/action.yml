@@ -17,6 +17,6 @@ outputs:
     description: Whether guessed the number
 runs:
   using: node16
-  pre: pre.js
   main: main.js
+  pre: pre.js
   post: post.js
