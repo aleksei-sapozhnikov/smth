@@ -31,8 +31,7 @@ runs:
       id: guess-number
       shell: bash
       run: |
-        echo "Number = $number"
-        if [[ "$number" == '10' ]]
+        if [[ "${{inputs.number}}" == '10' ]]
         then 
           guessed=true 
         else 
