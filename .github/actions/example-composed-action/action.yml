@@ -11,8 +11,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Get code
-      uses: actions/checkout@v3
     - name: Print build number
       shell: bash
       run: echo ${{github.run_number}}
