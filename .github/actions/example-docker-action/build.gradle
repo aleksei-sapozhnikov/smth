@@ -10,5 +10,5 @@ java {
 }
 
 jar {
-    baseName 'action'
+    archiveBaseName 'action'
 }
