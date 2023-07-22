@@ -13,6 +13,7 @@ public class Main {
     System.out.println("guessed = " + guessed);
     // set action output
     setOutput("guessed-number", String.valueOf(guessed));
+    System.out.println("guessed-number=" + guessed);
   }
 
   private static String getInput(String key) {
