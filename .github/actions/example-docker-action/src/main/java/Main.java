@@ -1,14 +1,29 @@
 public class Main {
   public static void main(String[] args) {
-    // printing values
-    System.out.println("VAR1 = " + System.getenv("VAR1"));
-    System.out.println("VAR2 = " + System.getenv("VAR2"));
-    // simple logic with number input
-    String strNumber = System.getenv("NUMBER");
-    System.out.println("NUMBER = " + strNumber);
-    boolean guessed = "10".equals(strNumber);
+    // read inputs
+    String var1 = getInput("var1");
+    String var2 = getInput("var2");
+    String number = getInput("number");
+    // print for info
+    System.out.println("var1 = " + var1);
+    System.out.println("var2 = " + var2);
+    System.out.println("number = " + number);
+    // check if guessed the number
+    boolean guessed = "10".equals(number);
     System.out.println("guessed = " + guessed);
-    // output
-    System.out.println("guessed-number=" + guessed);
+    // set action output
+    setOutput("guessed-number", String.valueOf(guessed));
+  }
+
+  private static String getInput(String key) {
+    if (key == null) {
+      return null;
+    }
+    return System.getenv("INPUT_" + key.toUpperCase());
+  }
+
+  @SuppressWarnings("SameParameterValue")
+  private static void setOutput(String key, String value) {
+    System.out.printf("%s=%s >> $GITHUB_OUTPUT%n", key, value);
   }
 }
