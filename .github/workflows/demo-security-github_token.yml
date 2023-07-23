@@ -10,14 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set "bug" label
-#        if: contains (github.event.issue.title, 'bug')
+#        if: contains(github.event.issue.title, 'bug')
         run: |
           echo ---
           echo The step runs only if issue title contains 'bug' text
           echo The check is made inside the method':'
-          echo '  if: contains (github.event.issue.title,' \' bug\' ')'
+          echo '  if: contains(github.event.issue.title,' \'bug\' ')'
           echo Such a check is not vulnerable for script-injection attack as we don't execute it in shell
-          echo If the issue title contains \'bug\' word, then the \'bug\' label is set using Github API
+          echo If the issue title contains' \'bug\' 'word, then the' \'bug\' 'label is set using Github API
           echo ---
           curl -L \
             -X POST \
