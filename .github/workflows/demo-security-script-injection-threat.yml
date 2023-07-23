@@ -1,10 +1,12 @@
 name: Demo on how script injection (threat) can happen
 on:
-#  issues:
-#    types:
-#      - opened
-#      - reopened
-#  push:
+  #  issues:
+  #    types:
+  #      - opened
+  #      - reopened
+  push:
+    branches:
+      - master
 jobs:
   assign-label:
     runs-on: ubuntu-latest
