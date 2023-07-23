@@ -20,11 +20,11 @@ jobs:
           echo ---
   assign-label-write-permissions:
     runs-on: ubuntu-latest
+    if: contains(github.event.issue.title, 'bug')
     permissions:
       issues: write
     steps:
       - name: Set "bug" label (WRITE permissions -success granted)
-        if: contains(github.event.issue.title, 'bug')
         env:
           API_BASE: "https://api.github.com/repos"
           REPO_PATH: ${{github.repository}}
@@ -44,11 +44,11 @@ jobs:
   assign-label-read-permissions:
     runs-on: ubuntu-latest
     continue-on-error: true
+    if: contains(github.event.issue.title, 'bug')
     permissions:
       issues: read
     steps:
       - name: Set "bug" label (READ permissions - fail)
-        if: contains(github.event.issue.title, 'bug')
         env:
           API_BASE: "https://api.github.com/repos"
           REPO_PATH: ${{github.repository}}
