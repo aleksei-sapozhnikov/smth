@@ -22,7 +22,7 @@ jobs:
           echo ---
           echo In order for the job to perform the operation it needs permissions
           echo The permissions are set in the \'permissions\' section
-          echo Here the permission is to write to an issue (to be able to store a new label)
+          echo Here the permission is to write to an issue '(to be able to store a new label)'
           echo ---
       - name: Set "bug" label
 #        if: contains(github.event.issue.title, 'bug')
