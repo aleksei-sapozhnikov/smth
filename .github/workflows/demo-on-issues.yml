@@ -1,11 +1,13 @@
 name: Demo - on Issues action
-on: [issues]
+on:
+  #  issues:
+  workflow_dispatch:
 jobs:
   output_environment:
     runs-on: ubuntu-latest
     steps:
       - name: Print environment
-        run: | 
+        run: |
           echo Issue: "${{github.event.issue.title}}"
           echo "${{toJSON(github.event.changes)}}"
           

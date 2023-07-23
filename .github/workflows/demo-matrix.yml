@@ -1,8 +1,7 @@
 name: Demo - matrix
 on:
-  push:
-    branches:
-      - master
+  #  push:
+  workflow_dispatch:
 jobs:
   build:
     continue-on-error: true

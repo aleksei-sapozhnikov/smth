@@ -1,8 +1,6 @@
 name: Demo - build project
 on:
-  push:
-    branches:
-      - master
+  #  push:
   workflow_dispatch:
 jobs:
   output_environment:

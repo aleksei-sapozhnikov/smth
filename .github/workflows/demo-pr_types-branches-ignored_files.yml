@@ -1,18 +1,19 @@
 name: Demo - on PR types; branches; ignored files
 on:
-  pull_request:
-    types:
-      - opened
-      - review_requested
-    branches:
-      - master
-    paths-ignore:
-      - '.github/workflows/*'
-  push:
-    branches:
-      - master
-    paths-ignore:
-      - '.github/workflows/*'
+  #  pull_request:
+  #    types:
+  #      - opened
+  #      - review_requested
+  #    branches:
+  #      - master
+  #    paths-ignore:
+  #      - '.github/workflows/*'
+  #  push:
+  #    branches:
+  #      - master
+  #    paths-ignore:
+  #      - '.github/workflows/*'
+  workflow_dispatch:
 jobs:
   deploy:
     runs-on: ubuntu-latest

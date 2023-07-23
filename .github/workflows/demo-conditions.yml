@@ -1,8 +1,7 @@
 name: Demo - conditional jobs/steps, continue-on-error
 on:
-  push:
-    branches:
-      - master
+  #  push:
+  workflow_dispatch:
 jobs:
   test:
     runs-on: ubuntu-latest
