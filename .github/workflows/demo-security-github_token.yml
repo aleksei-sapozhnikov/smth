@@ -6,31 +6,59 @@ on:
       - reopened
   push:
 jobs:
-  assign-label:
+  describe-jobs:
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
     steps:
-      - name: Describe the job
+      - name: Describe the other jobs
         run: |
           echo ---
-          echo The step runs only if issue title contains 'bug' text
+          echo The jobs run only if issue title contains 'bug' text
           echo The check is made inside the method':'
           echo '  if: contains(github.event.issue.title,' \'bug\' ')'
           echo Such a check is not vulnerable for script-injection attack as we don\'t execute it in shell
           echo If the issue title contains \'bug\' 'word, then the' \'bug\' 'label is set using Github API'
           echo ---
-          echo In order for the job to perform the operation it needs permissions
-          echo The permissions are set in the \'permissions\' section
-          echo Here the permission is to write to an issue '(to be able to store a new label)'
-          echo ---
-      - name: Set "bug" label
-#        if: contains(github.event.issue.title, 'bug')
+  assign-label-write-permissions:
+    runs-on: ubuntu-latest
+    if: contains(github.event.issue.title, 'bug')
+    permissions:
+      issues: write
+    steps:
+      - name: Set "bug" label (WRITE permissions -success granted)
         env:
           API_BASE: "https://api.github.com/repos"
           REPO_PATH: ${{github.repository}}
           ISSUE_NUMBER: ${{github.event.issue.number}}
         run: |
+          echo ---
+          echo Here we granted \'issue':' write\' permissions to the job
+          echo The job WILL be able to store a new label and succeed
+          echo ---
+          curl -L \
+          -X POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: Bearer ${{secrets.GITHUB_TOKEN}}" \
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          $API_BASE/$REPO_PATH/issues/$ISSUE_NUMBER/labels \
+          -d '{"labels":["bug"]}'
+  assign-label-read-permissions:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    if: contains(github.event.issue.title, 'bug')
+    permissions:
+      issues: read
+    steps:
+      - name: Set "bug" label (READ permissions - fail)
+        env:
+          API_BASE: "https://api.github.com/repos"
+          REPO_PATH: ${{github.repository}}
+          ISSUE_NUMBER: ${{github.event.issue.number}}
+        run: |
+          echo ---
+          echo Here we granted \'issue':' read\' permissions to the job
+          echo The job WILL NOT be able to store a new label and will fail
+          echo Added \'continue-on-error':' true\' to the job properties to not fail the whole workflow
+          echo ---
           curl -L \
           -X POST \
           -H "Accept: application/vnd.github+json" \
