@@ -1,8 +1,7 @@
 name: Demo - using custom actions
 on:
-  push:
-    branches:
-      - master
+  #  push:
+  workflow_dispatch:
 jobs:
   use-composed-action:
     runs-on: ubuntu-latest

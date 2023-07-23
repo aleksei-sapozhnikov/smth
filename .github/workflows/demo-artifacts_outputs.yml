@@ -1,8 +1,7 @@
 name: Demo - artifacts, outputs
 on:
-  push:
-    branches:
-      - master
+  #  push:
+  workflow_dispatch:
 jobs:
   test:
     runs-on: ubuntu-latest

@@ -1,9 +1,7 @@
 name: Demo - on Issues action
 on:
   #  issues:
-  push:
-    branches:
-      - master
+  workflow_dispatch:
 jobs:
   output_environment:
     runs-on: ubuntu-latest
