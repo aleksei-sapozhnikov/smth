@@ -33,7 +33,7 @@ jobs:
           echo This is a step proteced from script injection
           echo Before using the text, the script sets it as environment variable - treats it as text only
           echo Open/Reopen an issue entitled, e.g.':' 'a";echo !!! I have bugexecuted a script !!!"'
-          echo Now the script in the title won't be executed
+          echo Now the script in the title will not be executed
           echo "(and the issue WILL be identified as bug because the whole string is considered as text)"
           echo ---
           if [[ "$TITLE" == *"bug"* ]]; 
