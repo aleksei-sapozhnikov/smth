@@ -1,5 +1,6 @@
 name: Demo - on Issues action
-on: [issues]
+on:
+#  issues:
 jobs:
   output_environment:
     runs-on: ubuntu-latest
