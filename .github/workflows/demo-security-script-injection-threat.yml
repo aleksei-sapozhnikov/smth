@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print instruction
-        run: echo Create an issue entitled, e.g. 'a\";echo I have executed a script!\"'
+        run: echo Create an issue entitled, e.g. 'a";echo I have executed a script!"'
       - name: Assign label
         run: |
           issue-title="${{github.event.issue.title}}"
