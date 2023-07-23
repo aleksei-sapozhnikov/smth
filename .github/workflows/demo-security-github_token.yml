@@ -15,7 +15,7 @@ jobs:
           echo The step runs only if issue title contains 'bug' text
           echo The check is made inside the method':'
           echo '  if: contains(github.event.issue.title,' \'bug\' ')'
-          echo Such a check is not vulnerable for script-injection attack as we don't execute it in shell
+          echo Such a check is not vulnerable for script-injection attack as we don\'t execute it in shell
           echo If the issue title contains' \'bug\' 'word, then the' \'bug\' 'label is set using Github API'
           echo ---
       - name: Set "bug" label
