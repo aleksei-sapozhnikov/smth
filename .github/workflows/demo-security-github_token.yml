@@ -8,6 +8,8 @@ on:
 jobs:
   assign-label:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
       - name: Describe the job
         run: |
@@ -18,13 +20,21 @@ jobs:
           echo Such a check is not vulnerable for script-injection attack as we don\'t execute it in shell
           echo If the issue title contains \'bug\' 'word, then the' \'bug\' 'label is set using Github API'
           echo ---
+          echo In order for the job to perform the operation it needs permissions
+          echo The permissions are set in the \'permissions\' section
+          echo Here the permission is to write to an issue '(to be able to store a new label)'
+          echo ---
       - name: Set "bug" label
-        if: contains(github.event.issue.title, 'bug')
+#        if: contains(github.event.issue.title, 'bug')
+        env:
+          API_BASE: "https://api.github.com/repos"
+          REPO_PATH: ${{github.repository}}
+          ISSUE_NUMBER: ${{github.event.issue.number}}
         run: |
           curl -L \
           -X POST \
           -H "Accept: application/vnd.github+json" \
-          -H "Authorization: Bearer $GITHUB_TOKEN" \
+          -H "Authorization: Bearer ${{secrets.GITHUB_TOKEN}}" \
           -H "X-GitHub-Api-Version: 2022-11-28" \
-          https://api.github.com/repos/OWNER/REPO/issues/ISSUE_NUMBER/labels \
+          $API_BASE/$REPO_PATH/issues/$ISSUE_NUMBER/labels \
           -d '{"labels":["bug"]}'
