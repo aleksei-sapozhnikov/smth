@@ -13,8 +13,8 @@ jobs:
         run: echo Create an issue entitled, e.g.':' 'a";echo I have executed a script!"'
       - name: Assign label
         run: |
-          issue-title="${{github.event.issue.title}}"
-          if [["$issue.title" == *"bug"*]]; 
+          title="${{github.event.issue.title}}"
+          if [["$title" == *"bug"*]]; 
           then
             echo "Issue is a bug"
           else
