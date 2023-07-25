@@ -24,14 +24,14 @@ on:
       call-result:
         description: Workflow result output
         value: ${{jobs.job-perform.outputs.job-result}}
-jobs:
-  workflow-description:
-    runs-on: ubuntu-latest
     env:
       VAR1: ${{inputs.var1}}
       VAR2: ${{inputs.var2}}
       VAR3: ${{inputs.var3}}
       SECRET1: ${{secrets.secret1}}
+jobs:
+  workflow-description:
+    runs-on: ubuntu-latest
     steps:
       - name: Print workflow description
         run: |
