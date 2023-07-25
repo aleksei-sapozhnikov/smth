@@ -28,6 +28,11 @@ public class Action {
     String description =
         String.join(
             System.lineSeparator(),
+            System.lineSeparator(),
+            System.lineSeparator(),
+            "------------------------------------------------",
+            "------------   ACTION DESCRIPTION   ------------",
+            "------------------------------------------------",
             "---",
             "This a sample Docker custom action which utilizes logic written on Java",
             "It uses Docker to get needed (Java/Gradle) environment to build and execute the logic",
