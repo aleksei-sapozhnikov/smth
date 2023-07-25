@@ -1,0 +1,63 @@
+name: Demo - job/steps conditions and behaviour on errors
+on:
+  #  push:
+  workflow_dispatch:
+jobs:
+  workflow-description:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print workflow description
+        run: |
+          echo ---
+          echo This workflow shows how to use conditions and to treat errors
+          echo The first job simply fails on execution. But the workflow is not considered as failed 
+          echo '  because the job has \'continue-on-error\' flag set to \'true\'
+          echo ---
+          echo The other jobs show more \'realistic\' workflow: test -> deploy
+          echo If the test fails, the step to upload test report as artifact will be executed
+          echo '  But if the step is successful, we will not waste resources on that'
+          echo After that, the success report can be printed. If both test and deploy were successful
+          echo '  Otherwise, nothing will be done'
+          echo ---
+  job-with-failed-step-and-continue-on-error:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Purposefully fail this step
+        continue-on-error: true
+        run: exit 1
+      - name: Next step after failing
+        run: echo "Executing next step after failing"
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download source code
+        uses: actions/checkout@v3
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: gradle
+      - name: Run tests
+        id: run-tests
+        run: gradle test
+      - name: Upload test report on failure
+        if: failure() && steps.run-tests.outcome == 'failure'
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-report
+          path: build/reports/tests/test/*
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print echo
+        run: echo ...
+  success-report:
+    needs: [ test, deploy ]
+    if: success()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print report
+        run: echo "Test and Deploy successful"

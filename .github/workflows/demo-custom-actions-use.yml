@@ -3,14 +3,26 @@ on:
   #  push:
   workflow_dispatch:
 jobs:
-  use-composed-action:
+  workflow-description:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print workflow description
+        run: |
+          echo ---
+          echo Shows usage of custom actions of 3 types: 
+          echo '  1) Composite: - action is a composition of workflow steps'
+          echo '  2) JavaScript: action is a logic written as JS scripts'
+          echo '  3) Docker: action uses Docker image running needed environment with logic'
+          echo Each action also should have its own specific description
+          echo ---
+  use-composite-action:
     runs-on: ubuntu-latest
     steps:
       - name: Get code
         uses: actions/checkout@v3
       - name: Use custom action
         id: use-action
-        uses: ./.github/actions/example-composed-action
+        uses: ./.github/actions/example-composite-action
         with:
           var1: var1_STEP
           number: 10

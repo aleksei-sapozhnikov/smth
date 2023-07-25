@@ -1,0 +1,60 @@
+name: Demo - defining a reusable workflow
+on:
+  workflow_call:
+    inputs:
+      var1:
+        description: First variable to print
+        required: true
+        type: string
+      var2:
+        description: Second variable to print
+        required: false
+        type: string
+        default: default var2
+      var3:
+        description: Third variable to print
+        required: false
+        type: number
+        default: 1
+    secrets:
+      secret1:
+        description: A sample secret
+        required: false
+    outputs:
+      call-result:
+        description: Workflow result output
+        value: ${{jobs.job-perform.outputs.job-result}}
+jobs:
+  workflow-description:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print workflow description
+        run: |
+          echo ---
+          echo Here we DEFINE a reusable workflow which can be used in other workflows
+          echo The workflow has inputs and secrets, required and not required
+          echo Secrets, unlike inputs, will be printed in the action output as \'***\' 
+          echo '   (actually, you should not print secrets at all)'
+          echo Also, outputs of the workflow are defined - they return the execution result
+          echo ---
+  job-perform:
+    runs-on: ubuntu-latest
+    env:
+      VAR1: ${{inputs.var1}}
+      VAR2: ${{inputs.var2}}
+      VAR3: ${{inputs.var3}}
+      SECRET1: ${{secrets.secret1}}
+    outputs:
+      job-result: ${{steps.set-result.outputs.call-params}}
+    steps:
+      - name: Print params
+        run: |
+          echo "var1 = $VAR1"
+          echo "var2 = $VAR2"
+          echo "var3 = $VAR3"
+          echo "secret1 = $SECRET1"
+      - name: Set result output
+        id: set-result
+        run: |
+          CALL_PARAMS="Params: var1 = $VAR1, var2 = $VAR2, var3 = $VAR3"
+          echo "call-params=$CALL_PARAMS" >> $GITHUB_OUTPUT

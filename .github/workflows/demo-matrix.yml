@@ -1,9 +1,20 @@
-name: Demo - matrix
+name: Demo - using matrix (same workflow, different inputs)
 on:
   #  push:
   workflow_dispatch:
 jobs:
-  build:
+  workflow-description:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print workflow description
+        run: |
+          echo ---
+          echo 'Shows usage of matrix - a feature to test job(s) with different input parameters combinations'
+          echo Generally all possible input combinations will happen
+          echo '  e.g. If you have 2 parameters, one with 2 inputs, another with 3 - the job will run 6 times'
+          echo It is also possible to include or exclude specific combinations manually
+          echo ---
+  some-job:
     continue-on-error: true
     strategy:
       matrix:
@@ -12,20 +23,10 @@ jobs:
         include:
           - java: 19
             runner: ubuntu-latest
-          - java: 19
-            runner: windows-latest
         exclude:
           - java: 17
             runner: windows-latest
     runs-on: ${{ matrix.runner }}
     steps:
-      - name: Download source code
-        uses: actions/checkout@v3
-      - name: Setup Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: temurin
-          java-version: ${{ matrix.java }}
-          cache: gradle
-      - name: Run test
-        run: gradle test
+      - name: Print matrix parameters
+        run: echo "Job called with java = ${{matrix.java}}; runner = ${{matrix.runner}}"

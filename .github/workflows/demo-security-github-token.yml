@@ -1,15 +1,15 @@
-name: Demo on using GITHUB_TOKEN in the action
+name: Demo - permission on using GITHUB_TOKEN
 on:
-  issues:
-    types:
-      - opened
-      - reopened
-  push:
+#  issues:
+#    types:
+#      - opened
+#      - reopened
+  workflow_dispatch:
 jobs:
-  describe-jobs:
+  workflow-description:
     runs-on: ubuntu-latest
     steps:
-      - name: Describe the other jobs
+      - name: Print workflow description
         run: |
           echo ---
           echo The jobs run only if issue title contains 'bug' text
@@ -23,12 +23,12 @@ jobs:
     if: contains(github.event.issue.title, 'bug')
     permissions:
       issues: write
+    env:
+      API_BASE: "https://api.github.com/repos"
+      REPO_PATH: ${{github.repository}}
+      ISSUE_NUMBER: ${{github.event.issue.number}}
     steps:
       - name: Set "bug" label (WRITE permissions -success granted)
-        env:
-          API_BASE: "https://api.github.com/repos"
-          REPO_PATH: ${{github.repository}}
-          ISSUE_NUMBER: ${{github.event.issue.number}}
         run: |
           echo ---
           echo Here we granted \'issue':' write\' permissions to the job
@@ -47,12 +47,12 @@ jobs:
     if: contains(github.event.issue.title, 'bug')
     permissions:
       issues: read
+    env:
+      API_BASE: "https://api.github.com/repos"
+      REPO_PATH: ${{github.repository}}
+      ISSUE_NUMBER: ${{github.event.issue.number}}
     steps:
       - name: Set "bug" label (READ permissions - fail)
-        env:
-          API_BASE: "https://api.github.com/repos"
-          REPO_PATH: ${{github.repository}}
-          ISSUE_NUMBER: ${{github.event.issue.number}}
         run: |
           echo ---
           echo Here we granted \'issue':' read\' permissions to the job

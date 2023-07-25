@@ -1,0 +1,61 @@
+name: 'Example composite action'
+description: Example composite action
+inputs:
+  var1:
+    description: Some variable 1
+    required: true
+  var2:
+    description: Some variable 2
+    required: false
+    default: var2_COMMON
+  number:
+    description: Guess the number
+    required: false
+    default: '-1'
+outputs:
+  guessed-number:
+    description: Whether guessed the number
+    value: ${{steps.guess-number.outputs.guessed}}
+runs:
+  using: composite
+  steps:
+    - name: Print action description
+      shell: bash
+      run: |
+        echo
+        echo ------------------------------------------------
+        echo ------------   ACTION DESCRIPTION   ------------
+        echo ------------------------------------------------
+        echo ---
+        echo This is a \'Composite\' action example - the most simple action type
+        echo Composite action is basically a number of workflow steps described in separate action.yml file
+        echo ---
+        echo This action makes some very basic things first, showing data it can get and work with
+        echo Then a more complex example shows how to perform logic with given inputs and return result as outputs
+        echo The step is to take input - number - and checks if the user \'guessed\' the value
+        echo ---
+    - name: Print build number
+      shell: bash
+      run: echo 'Build number:' "${{github.run_number}}"
+    - name: Print input variables
+      shell: bash
+      env:
+        VAR1: ${{inputs.var1}}
+        VAR2: ${{inputs.var2}}
+      run: |
+        echo "var1 = $VAR1"
+        echo "var2 = $VAR2"
+    - name: Return whether guessed the number
+      env:
+        NUMBER: ${{inputs.number}}
+      id: guess-number
+      shell: bash
+      run: |
+        if [[ $NUMBER == '10' ]]
+        then 
+          guessed=true 
+        else 
+          guessed=false 
+        fi
+        echo $guessed
+        echo "guessed=$guessed" >> $GITHUB_OUTPUT
