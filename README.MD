@@ -38,7 +38,7 @@ things here and hope it'll grow.
 - GitHub Actions - The Complete
   Guide [certificate](https://www.udemy.com/certificate/UC-852683ac-bea0-4019-a120-264cbbda7bed/)
     - Finished: 23 July 2023
-    - We moved to GitHub on my job, thought why not to implement CI/CD
+    - On my job, we moved to GitHub. I thought - now we can implement some CI/CD. Just need to learn about that.
 
 #### Examples:
 
