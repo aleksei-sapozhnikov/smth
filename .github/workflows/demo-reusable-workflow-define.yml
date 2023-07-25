@@ -27,6 +27,11 @@ on:
 jobs:
   workflow-description:
     runs-on: ubuntu-latest
+    env:
+      VAR1: ${{inputs.var1}}
+      VAR2: ${{inputs.var2}}
+      VAR3: ${{inputs.var3}}
+      SECRET1: ${{secrets.secret1}}
     steps:
       - name: Print workflow description
         run: |
@@ -44,13 +49,13 @@ jobs:
     steps:
       - name: Print params
         run: |
-          echo "var1 = ${{inputs.var1}}"
-          echo "var2 = ${{inputs.var2}}"
-          echo "var3 = ${{inputs.var3}}"
-          echo "secret1 = ${{secrets.secret1}}"
+          echo "var1 = $VAR1"
+          echo "var2 = $VAR2"
+          echo "var3 = $VAR3"
+          echo "secret1 = $SECRET1"
       - name: Set result output
         id: set-result
         run: |
-          CALL_PARAMS="Params: var1 = ${{inputs.var1}}; var2 = ${{inputs.var2}}; var3 = ${{inputs.var3}}; secret1 = ${{secrets.secret1}}"
+          CALL_PARAMS="Params: var1 = $VAR1, var2 = $VAR2, var3 = $VAR3, secret1 = $SECRET1"
           echo "call-params=$CALL_PARAMS" >> $GITHUB_OUTPUT
       - run: echo ${{steps.set-result.outputs.call-params}}
