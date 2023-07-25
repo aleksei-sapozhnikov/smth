@@ -37,7 +37,7 @@ jobs:
           echo '   (actually, you should not print secrets at all)'
           echo Also, outputs of the workflow are defined - they return the execution result
           echo ---
-  perform:
+  job-perform:
     runs-on: ubuntu-latest
     env:
       VAR1: ${{inputs.var1}}
