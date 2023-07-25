@@ -18,7 +18,7 @@ jobs:
           echo As a result, the echo command script can be unintentionally executed
           echo One of the jobs is protected, the other is not.  
           echo ---
-  assign-label:
+  perform-job:
     runs-on: ubuntu-latest
     steps:
       - name: Vulnerable step - executing title as command
@@ -33,7 +33,7 @@ jobs:
           echo "Issue title = $TITLE"
           if [[ "$title" == *"bug"* ]]; 
           then
-            echo "Issue is a bug"
+            echo "Issue IS a bug"
           else
             echo "Issue is NOT a bug"
           fi
@@ -50,7 +50,7 @@ jobs:
           echo "Issue title = $ISSUE_TITLE"
           if [[ "$ISSUE_TITLE" == *"bug"* ]]; 
           then
-            echo "Issue is a bug"
+            echo "Issue IS a bug"
           else
             echo "Issue is NOT a bug"
           fi
