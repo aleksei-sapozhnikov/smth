@@ -27,11 +27,6 @@ on:
 jobs:
   workflow-description:
     runs-on: ubuntu-latest
-    env:
-      VAR1: ${{inputs.var1}}
-      VAR2: ${{inputs.var2}}
-      VAR3: ${{inputs.var3}}
-      SECRET1: ${{secrets.secret1}}
     steps:
       - name: Print workflow description
         run: |
@@ -63,4 +58,8 @@ jobs:
         run: |
           CALL_PARAMS="Params: var1 = $VAR1, var2 = $VAR2, var3 = $VAR3, secret1 = $SECRET1"
           echo "call-params=$CALL_PARAMS" >> $GITHUB_OUTPUT
-      - run: echo ${{steps.set-result.outputs.call-params}}
+  aaa:
+    runs-on: ubuntu-latest
+    needs: job-perform
+    steps:
+      - run: echo ${{needs.job-perform.outputs.job-result}}
