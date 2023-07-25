@@ -73,6 +73,11 @@ jobs:
       BUILD_RESULT: ${{needs.build.outputs.build-result}}
       DEPLOY_FILE: ${{needs.build.outputs.deploy-file}}
     steps:
+      - name: (Cache demo) Get cached test file from cache
+        uses: actions/cache@v3
+        with:
+          key: gradle-${{github.run_number}}-${{hashFiles('**/build.gradle')}}
+          path: ~/test-file.txt
       - name: (Cache demo) Print cached test file content
         run: cat ~/test-file.txt
       - name: Download build artifacts
