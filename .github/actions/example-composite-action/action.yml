@@ -28,7 +28,7 @@ runs:
         echo ---
         echo This action makes some very basic things first, showing data it can get and work with
         echo Then a more complex example shows how to perform logic with given inputs and return result as outputs
-        echo The step is to take input (a number) and checks if the user \'guessed\' the value
+        echo The step is to take input - number - and checks if the user \'guessed\' the value
         echo ---
     - name: Print build number
       shell: bash
