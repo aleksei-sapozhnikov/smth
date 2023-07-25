@@ -1,4 +1,4 @@
-name: Demo - using the demo reusable workflow
+name: Demo - using reusable workflow
 on:
   #  push:
   workflow_dispatch:
