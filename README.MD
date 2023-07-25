@@ -22,6 +22,8 @@ things here and hope it'll grow.
 <details>
 <summary>Gradle</summary>
 
+#### Using:
+
 - Just decided to use it instead of Maven
 - I had a big job experience with Maven, but nothing with Gradle
 - Didn't meet any problems on basic usage - mostly it's just another syntax
@@ -59,3 +61,17 @@ things here and hope it'll grow.
 
 </details>
 
+<details>
+<summary>OAUTH 2.0</summary>
+
+#### Learning:
+
+- The Nuts and Bolts of OAuth
+  2.0 [certificate](https://www.udemy.com/certificate/UC-aaa657a0-1fca-4283-8c53-9b5886e3a3bc/)
+    - Finished: 17 Jun 2023
+    - On my job I faced an issue with Single Sign-On certificate expiration. Couldn't find any help, so decided
+      to learn about authorization things. After the course I knew what exactly to ask, so the issue was solved.
+    - This topic appeared to be very interesting, so I decided to make a pet project to play with that. When started,
+      found that there are even more useful (and market valuable) technologies to study before that.
+
+</details>
