@@ -39,7 +39,7 @@ jobs:
           echo ---
   job-perform:
     outputs:
-      job-result: ${{steps.set-result.outputs.params}}
+      job-result: ${{steps.set-result.outputs.call-params}}
     runs-on: ubuntu-latest
     steps:
       - name: Print params
@@ -52,4 +52,4 @@ jobs:
         id: set-result
         run: |
           CALL_PARAMS="Params: var1 = ${{inputs.var1}}; var2 = ${{inputs.var2}}; var3 = ${{inputs.var3}}; secret1 = ${{secrets.secret1}}"
-          echo "params=$CALL_PARAMS" >> $GITHUB_OUTPUT
+          echo "call-params=$CALL_PARAMS" >> $GITHUB_OUTPUT
