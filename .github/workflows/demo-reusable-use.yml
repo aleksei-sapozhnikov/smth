@@ -1,23 +1,33 @@
-name: Demo - using reusable workflow
+name: Demo - using the demo reusable workflow
 on:
   #  push:
   workflow_dispatch:
 jobs:
-  deploy-default:
-    uses: ./.github/workflows/demo-reusable-define.yml
+  workflow-description:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print workflow description
+        run: |
+          echo ---
+          echo Here we USE a reusable workflow which is defined in another file
+          echo First job sets only required inputs, others taken by reusable workflow defaults
+          echo Second jobs defines all inputs manually and prints what the used workflow returned as output 
+          echo ---
+  call-with-defaults:
+    uses: ./.github/workflows/demo-reusable-workflow-define.yml
     with:
       var1: caller var1
-  deploy:
-    uses: ./.github/workflows/demo-reusable-define.yml
+  call-with-custom:
+    uses: ./.github/workflows/demo-reusable-workflow-define.yml
     with:
       var1: caller var1
       var2: caller var2
       var3: 343
     secrets:
       secret1: caller secret
-  print-deploy-result:
-    needs: deploy
+  print-call-with-custom-result:
+    needs: call-with-custom
     runs-on: ubuntu-latest
     steps:
-      - name: Print deploy output
-        run: echo "${{needs.deploy.outputs.result}}"
+      - name: Print output from custom workflow used
+        run: echo "${{needs.call-with-custom.outputs.call-result}}"

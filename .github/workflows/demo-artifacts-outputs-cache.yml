@@ -1,0 +1,98 @@
+name: Demo - artifacts, outputs, cache
+on:
+  #  push:
+  workflow_dispatch:
+jobs:
+  workflow-description:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print workflow description
+        run: |
+          echo ---
+          echo This workflow shows using three concepts to store results between jobs/steps and further:
+          echo '  1) Caching - allows to avoid installing dependencies on every job / build if they do not change' 
+          echo '  2) Outputs - allows steps/jobs to return their result values (like functions)'
+          echo '  3) Artifacts - allows to share results as uploaded to some file server with ability to download them'
+          echo '    (e.g. to get Gradle test report in case the build failed)'
+          echo ---
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      build-result: ${{ steps.publish-build-result.outputs.res }}
+      deploy-file: ${{ steps.write-test-file.outputs.file-name }}
+    steps:
+      - name: Download source code
+        uses: actions/checkout@v3
+      - name: (Java format) Check format
+        uses: axel-op/googlejavaformat-action@v3.6.0
+        with:
+          args: "--replace"
+          skipCommit: true
+      - name: (Java format) Print format diffs and fail if not all formatted
+        run: git --no-pager diff --exit-code
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: gradle
+      - name: Build project
+        run: gradle build
+      - name: Publish result jar as output
+        id: publish-build-result
+        run: |
+          echo "Searching for 'smth-0.0.1.jar' or 'smth-0.0.1-SNAPSHOT.jar' (excluding e.g. 'smth-0.0.1-SNAPSHOT-plain.jar')"
+          filename_regex="[a-z].+-[0-9.]{1,8}-SNAPSHOT?\.jar"
+          full_regex=".*\/$filename_regex"
+          echo Full RegEx: "$full_regex"
+          find ./build/libs/*.jar -regextype posix-extended -regex "$full_regex" -execdir echo 'res={}' >> $GITHUB_OUTPUT ';'
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Build artifacts
+          path: build/libs/*
+      - name: (Cache demo) Cache test file for this very build (using build number as cache key)
+        uses: actions/cache@v3
+        with:
+          key: gradle-${{github.run_number}}-${{hashFiles('**/build.gradle')}}
+          path: ~/test-file.txt
+      - name: (Cache demo) Write the test file and return its name as output
+        id: write-test-file
+        env:
+          TEST_FILE: test-file.txt
+        run: |
+          echo ---
+          echo Here we create a sample file which will be used in the next job 
+          echo '  (we've set the file to cache in the previous step)' 
+          echo '  The file will remain valid for that build only as build number is part of the cache key'
+          echo '  We could also make this caching working between many builds by removing build number from the key'
+          echo ---
+          echo 'Actually, the idea of caching is to cache dependencies between many builds (libraries, dependencies)'
+          echo '  but here we do not need separate caching as it is built into the' \'Setup Java\' action
+          echo '  so this test file is just an example'
+          echo ---
+          echo "Test file contents" > ~/$TEST_FILE
+          echo "file-name=$TEST_FILE" >> $GITHUB_OUTPUT
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      BUILD_RESULT: ${{needs.build.outputs.build-result}}
+      DEPLOY_FILE: ${{needs.build.outputs.deploy-file}}
+    steps:
+      - name: (Cache demo) Print cached test file content
+        run: cat ~/test-file.txt
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: Build artifacts
+      - name: Deploy
+        run: |
+          DEPLOY_CONTENTS=$(< ~/test-file.txt)
+          PRESENT_FILES=$(ls)
+          echo ---
+          echo Running deploy with the following params:
+          echo '  Build result:' $BUILD_RESULT
+          echo '  Deploy file contents:' $DEPLOY_CONTENTS
+          echo '  Downloaded artifacts:' $PRESENT_FILES
+          echo ---

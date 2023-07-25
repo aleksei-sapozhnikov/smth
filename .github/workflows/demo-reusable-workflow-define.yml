@@ -1,0 +1,61 @@
+name: Demo - defining a reusable workflow
+on:
+  workflow_call:
+    inputs:
+      var1:
+        description: First variable to print
+        required: true
+        type: string
+      var2:
+        description: Second variable to print
+        required: false
+        type: string
+        default: default var2
+      var3:
+        description: Third variable to print
+        required: false
+        type: number
+        default: 1
+    secrets:
+      secret1:
+        description: A sample secret
+        required: false
+    outputs:
+      call-result:
+        description: Workflow result output
+        value: ${{jobs.job-perform.outputs.job-result}}
+jobs:
+  workflow-description:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print workflow description
+        run: |
+          echo ---
+          echo Here we DEFINE a reusable workflow which can be used in other workflows
+          echo The workflow has inputs and secrets (required or not)
+          echo Secrets, unlike inputs, will be printed in the action output as \'***\' 
+          echo "   (actually, you should not print secrets at all)"
+          echo Also, outputs of the workflow are defined - they return the execution result
+          echo ---
+  job-perform:
+    outputs:
+      job-result: ${{steps.set-result.outputs.out}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print params
+        run: |
+          echo "var1 = ${{inputs.var1}}"
+          echo "var2 = ${{inputs.var2}}"
+          echo "var3 = ${{inputs.var3}}"
+          echo "secret1 = ${{secrets.secret1}}"
+      - name: Set result output
+        id: set-result
+        run: |
+          read -r -d '' str << EOM
+          Workflow called with
+            var1 = ${{inputs.var1}}
+            var2 = ${{inputs.var2}}
+            var3 = ${{inputs.var3}}
+            secret1 = ${{secrets.secret1}}
+          EOM
+          echo "out=$str" >> $GITHUB_OUTPUT

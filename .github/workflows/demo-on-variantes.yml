@@ -1,0 +1,35 @@
+name: Demo - different \'on\' workflow triggers
+on:
+  #  pull_request:
+  #    types:
+  #      - opened
+  #      - review_requested
+  #    branches:
+  #      - master
+  #    paths-ignore:
+  #      - '.github/workflows/*'
+  #  push:
+  #    branches:
+  #      - master
+  #    paths-ignore:
+  #      - '.github/workflows/*'
+  #  issues:
+  #    types:
+  #      - opened
+  #      - reopened
+  workflow_dispatch:
+jobs:
+  workflow-description:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print workflow description
+        run: |
+          echo ---
+          echo Simply shows some popular workflow triggers, see the \'on\' section of the yml-file
+          echo Of course, they are commented, cause I don\'t want this workflow to happen every time
+          echo ---
+  some-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute step
+        run: echo "Executing some step"
