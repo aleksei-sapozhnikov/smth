@@ -24,14 +24,14 @@ on:
       call-result:
         description: Workflow result output
         value: ${{jobs.job-perform.outputs.job-result}}
+jobs:
+  workflow-description:
+    runs-on: ubuntu-latest
     env:
       VAR1: ${{inputs.var1}}
       VAR2: ${{inputs.var2}}
       VAR3: ${{inputs.var3}}
       SECRET1: ${{secrets.secret1}}
-jobs:
-  workflow-description:
-    runs-on: ubuntu-latest
     steps:
       - name: Print workflow description
         run: |
@@ -43,9 +43,14 @@ jobs:
           echo Also, outputs of the workflow are defined - they return the execution result
           echo ---
   job-perform:
+    runs-on: ubuntu-latest
+    env:
+      VAR1: ${{inputs.var1}}
+      VAR2: ${{inputs.var2}}
+      VAR3: ${{inputs.var3}}
+      SECRET1: ${{secrets.secret1}}
     outputs:
       job-result: ${{steps.set-result.outputs.call-params}}
-    runs-on: ubuntu-latest
     steps:
       - name: Print params
         run: |
