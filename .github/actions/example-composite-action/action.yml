@@ -25,7 +25,7 @@ runs:
         echo ---
         echo This is a \'Composite\' action example - the most simple action type
         echo Composite action is basically a number of workflow steps described in separate action.yml file
-        ---
+        echo ---
         echo This action makes some very basic things first, showing data it can get and work with
         echo Then a more complex example shows how to perform logic with given inputs and return result as outputs
         echo The step is to take input (a number) and checks if the user \'guessed\' the value
