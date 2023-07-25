@@ -1,9 +1,9 @@
 name: Demo - script injection threat
 on:
-  #  issues:
-  #    types:
-  #      - opened
-  #      - reopened
+  issues:
+    types:
+      - opened
+      - reopened
   workflow_dispatch:
 jobs:
   workflow-description:
