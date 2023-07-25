@@ -9,7 +9,7 @@ jobs:
       - name: Print workflow description
         run: |
           echo ---
-          echo Shows usage of matrix - a feature to test job(s) with different input parameters combinations
+          echo 'Shows usage of matrix - a feature to test job(s) with different input parameters combinations'
           echo Generally all possible input combinations will happen
           echo '  e.g. If you have 2 parameters, one with 2 inputs, another with 3 - the job will run 6 times'
           echo It's also possible to include or exclude specific combinations manually
