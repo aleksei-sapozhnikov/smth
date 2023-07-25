@@ -28,8 +28,8 @@ public class Action {
     String description =
         String.join(
             System.lineSeparator(),
-            System.lineSeparator(),
-            System.lineSeparator(),
+            "",
+            "",
             "------------------------------------------------",
             "------------   ACTION DESCRIPTION   ------------",
             "------------------------------------------------",
