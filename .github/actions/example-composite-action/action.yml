@@ -22,6 +22,10 @@ runs:
     - name: Print action description
       shell: bash
       run: |
+        echo
+        echo ------------------------------------------------
+        echo ------------   ACTION DESCRIPTION   ------------
+        echo ------------------------------------------------
         echo ---
         echo This is a \'Composite\' action example - the most simple action type
         echo Composite action is basically a number of workflow steps described in separate action.yml file

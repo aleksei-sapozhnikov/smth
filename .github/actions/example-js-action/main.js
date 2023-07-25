@@ -23,7 +23,7 @@ function run() {
             '------------------------------------------------',
             '------------   ACTION DESCRIPTION   ------------',
             '------------------------------------------------',
-            '',
+            '---',
             'This is a sample JavaScript action',
             'The action is performed by calling .js files defined in action.yml file',
             'Technically 3 JS files can be defined: pre (before logic), main (logic), and post (after logic) ',

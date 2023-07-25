@@ -33,7 +33,7 @@ public class Action {
             "------------------------------------------------",
             "------------   ACTION DESCRIPTION   ------------",
             "------------------------------------------------",
-            "",
+            "---",
             "This a sample Docker custom action which utilizes logic written on Java",
             "It uses Docker to get needed (Java/Gradle) environment to build and execute the logic",
             "---",
