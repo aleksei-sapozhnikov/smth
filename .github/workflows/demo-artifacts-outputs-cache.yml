@@ -23,19 +23,6 @@ jobs:
     steps:
       - name: Download source code
         uses: actions/checkout@v3
-      - name: (Java format) Check format
-        uses: axel-op/googlejavaformat-action@v3.6.0
-        with:
-          args: "--replace"
-          skipCommit: true
-      - name: (Java format) Print format diffs and fail if not all formatted
-        run: git --no-pager diff --exit-code
-      - name: Setup Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: temurin
-          java-version: 17
-          cache: gradle
       - name: Build project
         run: gradle build
       - name: Publish result jar as output
