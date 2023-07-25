@@ -1,5 +1,3 @@
-[![Workflow on push](https://github.com/aleksei-sapozhnikov/smth/actions/workflows/onpush-action.yml/badge.svg?branch=master)](https://github.com/aleksei-sapozhnikov/smth/actions/workflows/onpush-action.yml)
-
 # Learning something
 
 It's a learning project to study things.
@@ -9,6 +7,20 @@ things here and hope it'll grow.
 
 # What I use and study here
 
-* Spring MVC
-* Gradle
-* Github Actions
+Spring MVC
+
+Gradle
+
+<details>
+    <summary>GitHub Actions</summary>
+
+Course: GitHub Actions - The Complete
+Guide [certificate](https://www.udemy.com/certificate/UC-852683ac-bea0-4019-a120-264cbbda7bed/)
+
+Demo workflows:
+
+- Common options for the 'on' action trigger: [link](.github/workflows/demo-on-variants.yml)
+- Using matrix to perform jobs with multiple parameter combinations: [link](.github/workflows/demo-matrix.yml)
+
+</details>
+
