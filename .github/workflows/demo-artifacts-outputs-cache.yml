@@ -12,6 +12,7 @@ jobs:
           echo This workflow shows using three concepts to store results between jobs/steps and further:
           echo '  1) Caching - allows to avoid installing dependencies on every job / build if they do not change' 
           echo '  2) Outputs - allows steps/jobs to return their result values (like functions)'
+          echo '    WARNING - do not include secrets to your outputs, the outputs will not be created because of that'
           echo '  3) Artifacts - allows to share results as uploaded to some file server with ability to download them'
           echo '    (e.g. to get Gradle test report in case the build failed)'
           echo ---
