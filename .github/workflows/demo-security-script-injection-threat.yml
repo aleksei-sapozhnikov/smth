@@ -48,7 +48,7 @@ jobs:
           echo "(and the issue WILL be identified as bug because" \'bugexecuted\' "is also a part of the title)"
           echo ---
           echo "Issue title = $ISSUE_TITLE"
-          if [[ "$TITLE" == *"bug"* ]]; 
+          if [[ "$ISSUE_TITLE" == *"bug"* ]]; 
           then
             echo "Issue is a bug"
           else
