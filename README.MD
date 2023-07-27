@@ -1,46 +1,50 @@
-# Learning something
+# Learning smth
 
-It's a learning project to study things.
-Just using technologies which we don't use at work but that
-are interesting to learn for me. I'll keep the list of new
-things here and hope it'll grow.
+This project is about learning technologies I cannot / don't have time to use at work. There is no any other super
+mission.
+
+<!-- TOC -->
+* [What I use and study here](#what-i-use-and-study-here)
+    * [Spring Framework](#spring-framework)
+      * [Learning](#learning)
+    * [Gradle](#gradle)
+      * [Using](#using)
+    * [GitHub Actions](#github-actions)
+      * [Learning](#learning-1)
+      * [Examples](#examples)
+    * [OAUTH 2.0](#oauth-20)
+      * [Learning](#learning-2)
+<!-- TOC -->
 
 # What I use and study here
 
-<details>
-<summary>Spring Framework</summary>
+### Spring Framework
 
-#### Learning:
+#### Learning
 
 - Spring for beginners [certificate](https://www.udemy.com/certificate/UC-d33a0011-e7dc-4d0b-a55e-1956d3dec908/)
     - Finished: 18 March 2023
     - Spring a must-know tool to increase ones chances on the market
     - I couldn't use it on my job, so started with something
 
-</details>
+### Gradle
 
-<details>
-<summary>Gradle</summary>
-
-#### Using:
+#### Using
 
 - Just decided to use it instead of Maven
 - I had a big job experience with Maven, but nothing with Gradle
 - Didn't meet any problems on basic usage - mostly it's just another syntax
 
-</details>
+### GitHub Actions
 
-<details>
-    <summary>GitHub Actions</summary>
-
-#### Learning:
+#### Learning
 
 - GitHub Actions - The Complete
   Guide [certificate](https://www.udemy.com/certificate/UC-852683ac-bea0-4019-a120-264cbbda7bed/)
     - Finished: 23 July 2023
     - On my job, we moved to GitHub. I thought - now we can implement some CI/CD. Just need to learn about that.
 
-#### Examples:
+#### Examples
 
 - Common triggers ('on'): [link](.github/workflows/demo-triggers.yml)
 - Repository / environment variables and secrets [link](.github/workflows/demo-env-variables-secrets.yml)
@@ -59,12 +63,9 @@ things here and hope it'll grow.
     - Script injection vulnerabilities: [link](.github/workflows/demo-security-script-injection-threat.yml)
     - Permissions and $GITHUB_TOKEN: [link](.github/workflows/demo-security-github-token.yml)
 
-</details>
+### OAUTH 2.0
 
-<details>
-<summary>OAUTH 2.0</summary>
-
-#### Learning:
+#### Learning
 
 - The Nuts and Bolts of OAuth
   2.0 [certificate](https://www.udemy.com/certificate/UC-aaa657a0-1fca-4283-8c53-9b5886e3a3bc/)
@@ -73,5 +74,3 @@ things here and hope it'll grow.
       to learn about authorization things. After the course I knew what exactly to ask, so the issue was solved.
     - This topic appeared to be very interesting, so I decided to make a pet project to play with that. When started,
       found that there are even more useful (and market valuable) technologies to study before that.
-
-</details>
