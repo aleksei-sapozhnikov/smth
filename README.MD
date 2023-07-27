@@ -23,7 +23,7 @@ mission.
 #### Learning
 
 - Spring for beginners [certificate](https://www.udemy.com/certificate/UC-d33a0011-e7dc-4d0b-a55e-1956d3dec908/)
-    - Finished: 18 March 2  023
+    - Finished: 18 March 2023
     - Spring a must-know tool to increase ones chances on the market
     - I couldn't use it on my job, so started with something
 
